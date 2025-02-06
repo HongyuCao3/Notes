@@ -20,9 +20,30 @@
 - framework (*the structure of method is correspondent with contributions in this paper*)
 
   - functions:
-    - IP Routing Analysis Function
+    - IP Routing Analysis Function (flow management)
+      - process: public-availiable BGP routing table & PyBGPStream code $\rightarrow$ instruction fine-tune
+      - input: instruction ?
+      - output: python code
+      - target:
+        - uitilty $\uparrow$: BGP route anomalies$\downarrow$
+        - responsiveness$\uparrow$ : disruption, outages, ineffciencies $\downarrow$
     - Packet Analysis Function
+      - input: instruction ?
+      - output: python code
+      - target:
+        - calculte RTT for TCP & UDP
+        - identify inefficiencies or anomalies
+        - throughput, latency, and packet loss rate,
+        - QoS: examining jitter $\rightarrow$  variability
     - Performance Analysis Function:
+      - input: dataframe & instruction
+      - output: python code
+      - target:
+        - infrastructure planning & optimization decisions
+
+          - calculate peruser capacity increases
+          - investment cost efficiency
+          - analyzing jitter
   - Implementation
     - Training data (benchmark building)
       - retrieve & aggregate data from NFs & OAM system
