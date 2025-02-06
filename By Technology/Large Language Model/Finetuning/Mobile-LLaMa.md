@@ -43,7 +43,7 @@
       - target:
         - infrastructure planning & optimization decisions
 
-          - calculate peruser capacity increases
+          - calculate per user capacity increases
           - investment cost efficiency
           - analyzing jitter
   - Implementation
