@@ -25,9 +25,21 @@
     - answer what-if queries
 - Framework
 
-  - question $\rightarrow$ in-context-learning question $\rightarrow$ LLM generate codes $\rightarrow$ check $\rightarrow$ optimization solver (run code) $\rightarrow$ LLM analysis (readable answer)
+  - question $\rightarrow$ in-context-learning question $\rightarrow$ LLM generate codes(3 chances) $\rightarrow$ check $\rightarrow$ optimization solver (run code) $\rightarrow$ LLM analysis (readable answer)
 
 ## Evaluation
 
-- benchmark: 5 scenarios
+- benchmark
+  - 5 scenarios, GPT rephrase
+    - facility location
+    - multi-commodity network flow for distribution of products
+    - workforce assignment optimization
+    - traveling salesman problem
+    - coffee distribution scenario
+  - Accuracy: average success rate (question answer)
+  - In out distribution: same type of example as context or not
+    - in > out
+  - selection method:
+    - random < nearest neighbors
 - deployment
+  - TODO:
