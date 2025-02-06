@@ -20,11 +20,13 @@
 - framework (*the structure of method is correspondent with contributions in this paper*)
 
   - functions:
+
     - IP Routing Analysis Function (flow management)
-      - process: public-availiable BGP routing table & PyBGPStream code $\rightarrow$ instruction fine-tune
+      - process: public-availiable BGP routing table (mrt) & PyBGPStream code $\rightarrow$ instruction fine-tune
       - input: instruction ?
       - output: python code
       - target:
+
         - uitilty $\uparrow$: BGP route anomalies$\downarrow$
         - responsiveness$\uparrow$ : disruption, outages, ineffciencies $\downarrow$
     - Packet Analysis Function
@@ -45,16 +47,14 @@
           - investment cost efficiency
           - analyzing jitter
   - Implementation
-    - Training data (benchmark building)
-      - retrieve & aggregate data from NFs & OAM system
-        - TODO: what's NF, what's OAM
-        - traffic patterns: format?
-        - user connectivity statistics: format?
-        - performanc metrics: ?
-        - infrastructure details: ?
-        - financial information: ?
-  - instruction fine-tuning
-  - self-instruct prompt
+
+    - instruction fine-tuning
+      - reasons: ?
+      - TODO: read details
+    - self-instruct prompt
+      - reasons:
+        - complexity of 5G network
+        - diversify the task pool
 
 ## Evaluation
 
