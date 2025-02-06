@@ -42,4 +42,18 @@
   - selection method:
     - random < nearest neighbors
 - deployment
-  - TODO:
+  - type:
+    - front-end service:
+    - agent service
+    - virtual machines
+  - performance:
+    - user excitement
+    - help of understanding
+    - handle user's hypothesis, can reasoning for what-if query
+
+## Limitation
+
+- need precise discribed question
+- dependency on application-specific components
+- still some mistakes
+- need examples (in context learning)
