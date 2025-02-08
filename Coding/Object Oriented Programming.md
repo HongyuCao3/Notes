@@ -10,3 +10,14 @@
  - python packages
    - `dataclass`
    - `pydantic`
+- tips
+  - place functions to the class that should be responsible for them
+    - dataset: 
+      - load data from file
+      - get entities in the dataset
+      - get records of time periods
+    - RAG
+      - load /save /generate embedding
+      - calculate similarity / retrieve topk
+    - model
+      - load model from checkpoints & inference with / without RAG
