@@ -2,8 +2,6 @@
 
 [paperlink](https://ieeexplore.ieee.org/document/10735663)
 
-[codelink]()
-
 ## Motivation
  - Technical:
    - commercial LLMs: accuracy & consistency $\downarrow$
@@ -44,8 +42,21 @@
        - filter predetermind scaniing script sessions $\rightarrow$ query rate limitation $\downarrow$, cost-effectiveness $\uparrow$
 ## Result
  - offline experiments
+   - metrics: success rate (reasonable, accurate, consistent)
+   - performance
+     - short session > long session
+     - in-context learning $\uparrow$
  - deployment
+   - setting: 3 weeks
+   - metrics: token cosumption?
+   - performance:
+     - filter $\uparrow$
 ## Limitation
+ - deployment costs
+ - prompt injection attacks $\Rightarrow$ input sanitizing
 ## Insight & QAs
  - writing style
    - cycles of {challenge $\rightarrow$ solution}
+ - assumption & proof
+   - on/offline experiments (success rate) $\Rightarrow$ LLM can emulate honey pot
+   - cost analysis & deployment $\Rightarrow$ filter mechanism necessity
