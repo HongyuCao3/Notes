@@ -38,7 +38,23 @@
 
 ## Results
  - evaluation
-   - success rate: find the shortest path $\Rightarrow$ effectiveness
-   - path length weighted success rate $\Rightarrow$ efficiency
-   -  TODO:
+   - success rate (SR): find the shortest path $\Rightarrow$ effectiveness
+   - path length weighted success rate (SPL) $\Rightarrow$ efficiency
+ -  performance
+    - ground-truth guiding $>_{<5}$ fine-tuning $\gg_{>10}$ zero-shot
+    - not sensitive to distance $\Leftarrow$ fully exploration of env
+    - GPT4-turbo > other LLMs
+    - landmark visibility $\uparrow$ $\Rightarrow$ SR $\uparrow$ (intuitive)
+
 ## Limitation
+ - dependency on LLMs ability
+  - fine-tune $<$ GPT4-turbo
+
+
+# Insight & QAs
+ - what's the key hypothisis
+ - how to prove the challenge level $\uparrow$
+   - success rate of random/zero-shot/raw $\Rightarrow$ challenge of task
+ - how the experiments support the key hypothisis
+   - comparison with LLM-free & LLM-based methods
+   - <font color=red>human intuition analysis $\Rightarrow$ creative findings</font>
