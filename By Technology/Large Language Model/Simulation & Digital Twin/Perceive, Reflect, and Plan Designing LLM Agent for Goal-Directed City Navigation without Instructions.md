@@ -48,7 +48,7 @@
 
 ## Limitation
  - dependency on LLMs ability
-  - fine-tune $<$ GPT4-turbo
+ - fine-tune $<$ GPT4-turbo
 
 
 # Insight & QAs
