@@ -19,13 +19,41 @@
    - LLMs $\rightarrow$ assessment / assisting / vulnerability fixing (code generation)
      - agent-like
  - Detect (core)
-   -  LLMs $\rightarrow$ log analysis / penetration testing (investigation & plan) / qa, summarize, reasoning / [smart contracts](https://en.wikipedia.org/wiki/Smart_contract) analysis / website detection
+   -  LLMs $\rightarrow$ log analysis / penetration testing (investigation & plan) / qa, summarize, reasoning / [smart contracts](https://en.wikipedia.org/wiki/Smart_contract) analysis / website detection / sequence extraction
       -  agent-like
    -  LLMs $\rightarrow$ scenarios development
       -  simulation-like
--  TODO:
+-  Respond (core)
+   -  LLMs $\rightarrow$ respond / interaction to attackers
+      -  simulation-like
+
 ## Offensive: attacks designed by LLMs
+ - Reconnaissance (detection)
+   - LLMs $\rightarrow$ python script $\rightarrow$ scrape websites
+ - Initial Access (break in)
+   - LLMs $\rightarrow$ inject attack, delivery scripts
+     - agent-like
+   - LLMs $\rightarrow$ generating stories, emails
+     - simulation-like
+ - Execution (control)
+   - LLMs $\rightarrow$ malware $\rightarrow$ hide-trace
+     - agent-like
+ - Defense Evasion
+   - LLMs $\rightarrow$ auto malicious development 
+     - agent-like
+ - Credential Access (log in)
+   - LLMs $\rightarrow$ estimate password strength and guess password
+     - simulation-like
+ - Collection (information gathering)
+   - LLMs $\rightarrow$ IFrame injection $\rightarrow$ lauch malicious websites
+ - Command & Control 
+   - LLMs $\rightarrow$ shell command $\rightarrow$ connect underlying resources
 
 ## challenges
 
 ## Insights & QAs
+ - How to distinguish between simulation-like and agent-like application
+   - simulation-like
+     - simulate a web-system or human / victims
+   - agent-like
+     - providing analysis, code generation, but not interacting with system or human directly by attacking or defending
