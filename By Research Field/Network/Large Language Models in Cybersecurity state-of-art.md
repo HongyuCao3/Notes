@@ -50,6 +50,8 @@
    - LLMs $\rightarrow$ shell command $\rightarrow$ connect underlying resources
 
 ## challenges
+ - lack research about Identify, Respond and especially <font color =red> Recover</font>
+ - 
 
 ## Insights & QAs
  - How to distinguish between simulation-like and agent-like application
@@ -57,3 +59,8 @@
      - simulate a web-system or human / victims
    - agent-like
      - providing analysis, code generation, but not interacting with system or human directly by attacking or defending
+ - How to find research gaps
+   - from the survey's perspective
+     - find all possible research sub-domains according to a widely used standard
+     - classify the papers to sub-domains and count
+     - analyze the forcus and counts of papers in each domains
