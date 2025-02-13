@@ -51,7 +51,6 @@
 
 ## challenges
  - lack research about Identify, Respond and especially <font color =red> Recover</font>
- - 
 
 ## Insights & QAs
  - How to distinguish between simulation-like and agent-like application
