@@ -66,7 +66,7 @@
    - process
      - Step 1: Lagrangian and Minimax Game
        - sender's optimization problem + lagrange
-       - $\mathcal{L}(f, \lambda) = min_{f\in \Delta H} max_{\lambda \in R^{2Nmd}_{+}} = -E_{h\sim f}E_D[\sum_{a\in A}u(a,y)\cdot b(h(x), a)] + \sum_{s\in{+,-}}\sum_{i=1}^N\sum_{j=1}^d\sum_{a_i \in A_i}\lambda_{s, i,j,a_i}(E_fE_D[(h(x)_j -y_j)\cdot b_i(h(x), a_i)]-\gamma)$
+       - $min_{f\in \Delta H} max_{\lambda \in R^{2Nmd}_{+}} \mathcal{L}(f, \lambda) = -E_{h\sim f}E_D[\sum_{a\in A}u(a,y)\cdot b(h(x), a)] + \sum_{s\in{+,-}}\sum_{i=1}^N\sum_{j=1}^d\sum_{a_i \in A_i}\lambda_{s, i,j,a_i}(E_fE_D[(h(x)_j -y_j)\cdot b_i(h(x), a_i)]-\gamma)$
        - to a minimax game
      - Step 2: 
        - minimize: 
@@ -78,14 +78,14 @@
        - intuition:
          - bounded $\lambda$ into convex $\Lambda$
          - use online learning to reduce regret
-       - $\Lambda = {\lambda' |\ ||\lambda_1||_1 \leq C} \Rightarrow DecCE(f) \leq \gamma + \frac{1+2\epsilon}{C}$
+       - $\Lambda = \{\lambda' |\ ||\lambda_1||_1 \leq C\} \Rightarrow DecCE(f) \leq \gamma + \frac{1+2\epsilon}{C}$
          - $C\uparrow \Rightarrow DecCE(f)\downarrow$
-       - Step 4: Solving Bounded Minimax Games
-         - Intuition: updating $f$ and $\lambda$ to nash equilibrium
-         - maximize: Hedge Algorithm
-         - minimize: find best predictor from $H$, GSD
-           - loss function: $\mathcal{l}_\lambda = -[\sum_{a\in A} u(a,y)\cdot b(h(x),a) + \sum_{s\in{+,-}}\sum_{i=1}^N\sum_{j=1}^d\sum_{a_i \in A_i}\lambda_{s, i,j,a_i}(E_fE_D[(h(x)_j -y_j)\cdot b_i(h(x), a_i)]-\gamma]$
-           - target: $ERM(D, \lambda) = argmin_{h\in H}\frac{1}{n} \sum_{i=1}{n}\mathcal{l}_\lambda(h, x_i, y_i)$
+     - Step 4: Solving Bounded Minimax Games
+       - Intuition: updating $f$ and $\lambda$ to nash equilibrium
+       - maximize: Hedge Algorithm
+       - minimize: find best predictor from $H$, GSD
+         - loss function: $\mathcal{l}_\lambda = -[\sum_{a\in A} u(a,y)\cdot b(h(x),a) + \sum_{s\in{+,-}}\sum_{i=1}^N\sum_{j=1}^d\sum_{a_i \in A_i}\lambda_{s, i,j,a_i}(E_fE_D[(h(x)_j -y_j)\cdot b_i(h(x), a_i)]-\gamma]$
+         - target: $ERM(D, \lambda) = argmin_{h\in H}\frac{1}{n} \sum_{i=1}{n}\mathcal{l}_\lambda(h, x_i, y_i)$
    - results:
      - $DecCE(\hat{f}) \leq \gamma + \epsilon$
      - swap regret $\leq 2mL(\gamma+\epsilon)$
