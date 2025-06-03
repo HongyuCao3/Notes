@@ -27,7 +27,7 @@
    - intuition:
      - the predictor quality $\uparrow$, loss in real world same as prediction
    - decision calibrated
-     - $E_X[E_{\hat{Y\sim \hat{p}(X)}}[l(\hat{Y}, \delta(\hat{p}(X)))]] = E_X[E_{Y\sim p^*(X)}[l(Y, \delta(\hat{p}(X)))]]$ (accurate loss estimation)
+     - $E_X[E_{\hat{Y}\sim \hat{p}(X)}[l(\hat{Y}, \delta(\hat{p}(X)))]] = E_X[E_{Y\sim p^*(X)}[l(Y, \delta(\hat{p}(X)))]]$ (accurate loss estimation)
    - $\mathcal{L}$-decision-calibrated
      - if $\mathbb{\Delta} = \mathbb{\Delta}_\mathcal{L}$, contains all loss functions, then $\hat{p}$ become $\mathcal{L}$-decision-calibrated
      - satisfy no regret & accurate loss estimation, means $\forall \delta' \in \mathbb{\Delta}_\mathcal{L}$
