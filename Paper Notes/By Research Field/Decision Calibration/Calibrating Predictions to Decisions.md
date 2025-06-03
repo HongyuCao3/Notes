@@ -28,6 +28,9 @@
      - the predictor quality $\uparrow$, loss in real world same as prediction
    - decision calibrated
      - $E_X[E_{\hat{Y}\sim \hat{p}(X)}[l(\hat{Y}, \delta(\hat{p}(X)))]] = E_X[E_{Y\sim p^*(X)}[l(Y, \delta(\hat{p}(X)))]]$ (accurate loss estimation)
+     - $\Rightarrow E_X[E_{\hat{Y}\sim \hat{p}(x)}l(\hat{Y}, \delta(\hat{p}(X))) - E_{Y\sim p^*(x)}l(Y, \delta(\hat{p}(X)))]=0$
+     - $\Rightarrow E_X[E_{\hat{Y}\sim \hat{p}(x)}l(\hat{Y}, a) - E_{Y\sim p^*(x)}l(Y, a))]=0$
+     - if $l(Y, a) = mY + l_a(a)$ $\Rightarrow E_X[E\hat{Y}-Y] = 0$
    - $\mathcal{L}$-decision-calibrated
      - if $\mathbb{\Delta} = \mathbb{\Delta}_\mathcal{L}$, contains all loss functions, then $\hat{p}$ become $\mathcal{L}$-decision-calibrated
      - satisfy no regret & accurate loss estimation, means $\forall \delta' \in \mathbb{\Delta}_\mathcal{L}$
@@ -40,6 +43,7 @@
  - approximate decision calibration
    - accurate loss estimation $\leq \epsilon sup_{a\in A}||l(\cdot, a)||_2$
  - <font color = yellow>if not exist linear classifier increase the loss in different area, then the predictor satisfy $\mathcal{L}^K$-decision-calibration</font>
+   - $\hat{p} (\mathcal{L}^K, \epsilon)-\text{decision calibration} \Leftrightarrow \sup_{b\in \mathcal{B}^K}\sum_{a=1}^K\|E[(\hat{Y}-Y)b(\hat{p}(X), a)]\|_2 \leq \epsilon$
 
 ### Recalibration Algorithm
  - algorithm
