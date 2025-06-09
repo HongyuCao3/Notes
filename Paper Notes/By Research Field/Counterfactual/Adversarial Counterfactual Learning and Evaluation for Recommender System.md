@@ -32,3 +32,4 @@
      - $r_\theta = r_\theta/d_\theta, r_\psi = r_\psi/d_\psi$ 
 
 ## Key Insights
+ - uncertainty (unlabeled features or mechanism) can be regarded as adversial part 
