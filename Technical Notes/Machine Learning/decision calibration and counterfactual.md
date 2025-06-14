@@ -67,6 +67,11 @@
    - predictor may filter important feature in original state
    - representation misalignment (embedding not for decision)
  - evaluation bias: reward based benchmark, change to fairness risk-awareness, causal coherence
+ - start state bias:
+   - current method, the train and test trajectory start state is a fixed set
+   - given a decision maker, we expect it to perform well what ever the start point is
+   - use counterfactual to find the smallest change of start state to vary the action to minimize the reward to simulate uncertain real-world scenarios, the decision-maker to maximize under the smallest effect to maintain robustness.
+   - or just select the $\delta$ neighbor in manifold space to check the robustness
 
 ### Method
  - counterfactual can be used to find trajectory that minimize the decision maker's utility, the decision maker try to increase average utility
