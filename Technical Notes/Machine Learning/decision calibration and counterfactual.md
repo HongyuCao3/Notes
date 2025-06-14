@@ -60,6 +60,15 @@
    - $\lambda_3$ generated data should be in 
 
 ## Solution
+
+### Current Decision Bias
+ - state abstraction bias: loss of information
+   - from dataset bias
+   - predictor may filter important feature in original state
+   - representation misalignment (embedding not for decision)
+ - evaluation bias: reward based benchmark, change to fairness risk-awareness, causal coherence
+
+### Method
  - counterfactual can be used to find trajectory that minimize the decision maker's utility, the decision maker try to increase average utility
  - counterfactual as perspective? under any perspective the decision will not regret
  - counterfactual swap any step will not generate better results?
