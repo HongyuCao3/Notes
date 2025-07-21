@@ -20,6 +20,8 @@
   - Poor generalization
   - Sensitivity to distribution shift
   - Scalability issues
+- **what's the key issue this paper is going to address**
+- <font color =red>composed of Blocks [related works $\Rightarrow$ Limitation $\Rightarrow$ Issue(boldface)]</font>
 
 ### 4. Your Unique Perspective and Contributions
 - What **novel approach or perspective** do you propose?
@@ -137,6 +139,10 @@ Repeat:
   4. Update parameters ...
 Until convergence
 ```
+## Experiments
+  - <font color =red>every part address one issue in the introduction</font>
+  - ablation study
+  - hyper parameter sensitivity analysis
 
 ---
 
