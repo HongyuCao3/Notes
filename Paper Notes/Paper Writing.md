@@ -1,6 +1,16 @@
 # 📄 Research Paper Writing Guide
 
 ---
+## Title
+ - Incorporate precise technical keywords.
+
+   - Task: Emphasize the process or problem setting, e.g., simulation-to-decision-making.
+
+   - Module or Method: Highlight key technical components, such as perturbation or calibration.
+
+   - Objective: Reflect the high-level goal, e.g., robustness.
+
+ - Ensure that every word conveys a meaningful insight into the paper’s core contributions.
 
 ## 🧩 Introduction
 
@@ -9,10 +19,22 @@
 ### 1. Research Motivation and Importance
 - Why is this task/problem **emerging or important**?
 - Why is it necessary to address it now? (e.g., due to technical, social, or application-driven reasons)
+- First Paragraph Structure
+  - Opening sentence: Anchor the task in a high-impact application domain and explain its real-world significance with examples.
+
+   - Middle part: Identify concrete technical challenges or gaps in current solutions.
+
+   - Closing sentence: Clearly state your task or research objective to transition into the next section.
 
 ### 2. Major Challenges
 - What are the **key technical or practical challenges**?
 - How do these challenges limit current progress?
+- Second Paragraph Structure
+  - State the central challenge
+    - which part in the task need improvement?
+  - Analyze why it’s hard
+    - Use concrete reasoning: if previous technique fails, why does it fail, and under what conditions?
+  - Motivate the need for method
 
 ### 3. Existing Literature and Limitations
 - What has prior work done to address this problem?
@@ -21,12 +43,31 @@
   - Sensitivity to distribution shift
   - Scalability issues
 - **what's the key issue this paper is going to address**
+- Third Paragraph Structure
+  - existing method for module 1 with core remain issue
+  - ... for module 2 ...
+  
 - <font color =red>composed of Blocks [related works $\Rightarrow$ Limitation $\Rightarrow$ Issue(boldface)]</font>
 
 ### 4. Your Unique Perspective and Contributions
 - What **novel approach or perspective** do you propose?
 - What are the **key contributions** of this paper?
-
+ - Fourth Paragraph Structure
+   - Introduce core idea/perspective
+   - Provide high-level theoretical intuition
+   - Propose goals $\Rightarrow$ specifically designed steps (implementation), 1 sentence
+     - objective function
+     - training method
+   - Transition to a clear summary of contributions (from following types)
+      1. formulate new problem?
+      2. technical improvement
+      3. address data challenges
+         1. dirty noisy data?
+      4. computational benefit
+         1. scalable
+         2. convergence
+         3. efficient
+      5. application or deployment contributino
 ```markdown
 Our contributions are summarized as follows:
 1. We propose ...
