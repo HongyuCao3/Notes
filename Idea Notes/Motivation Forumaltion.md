@@ -21,25 +21,25 @@ The tension between these two creates the intellectual gap your research fills.
 
 1️⃣ Describe the Real Phenomenon
 
-What is the essential property or challenge in the real data/task?
+ - What is the essential property or challenge in the real data/task?
 
-Why does it matter (practically or scientifically)?
+ - Why does it matter (practically or scientifically)?
 
 2️⃣ Reveal the Model / Method Assumption
 
-What hidden assumptions, simplifications, or design goals does the existing paradigm make?
+ - What hidden assumptions, simplifications, or design goals does the existing paradigm make?
 
-Under what condition does it work well?
+ - Under what condition does it work well?
 
 3️⃣ Highlight the Mismatch
 
-Why do those assumptions not hold under the real phenomenon?
+ - Why do those assumptions not hold under the real phenomenon?
 
-What concrete effect or limitation does the mismatch cause?
+ - What concrete effect or limitation does the mismatch cause?
 
 4️⃣ State the Motivation
 
-This gap motivates us to [core idea / principle].
+ - This gap motivates us to [core idea / principle].
 
 ---
 
