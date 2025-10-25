@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "8610fd107479f9a0",
+        "id": "89ee40d975376281",
         "type": "tabs",
         "children": [
           {
-            "id": "5c231977ff8c3a09",
+            "id": "ea772173729947ef",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Technical Notes/Machine Learning/diffusion model.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "diffusion model"
+              "title": "新标签页"
             }
           }
         ]
@@ -147,19 +143,9 @@
               "icon": "lucide-list",
               "title": "大纲"
             }
-          },
-          {
-            "id": "551b201a15c69fdc",
-            "type": "leaf",
-            "state": {
-              "type": "git-view",
-              "state": {},
-              "icon": "git-pull-request",
-              "title": "Source Control"
-            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -177,15 +163,19 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ab3975abfb6f1e5f",
+  "active": "ea772173729947ef",
   "lastOpenFiles": [
-    "mamaghanDiffusionBasedCausal2023.md",
+    "Technical Notes/Machine Learning/initializer.md",
+    "Technical Notes/paper review.md",
+    "readme.md",
+    "Technical Notes/Machine Learning/representation learning vs manifold learning.md",
+    "Technical Notes/Machine Learning/representation learning vs mainfold learning 2.md",
     "Technical Notes/Machine Learning/diffusion model.md",
+    "mamaghanDiffusionBasedCausal2023.md",
     "E - /zotero/mamaghanDiffusionBasedCausal2023.md",
     "E - /zotero",
     "E - ",
     "Technical Notes/Machine Learning/decision calibration and counterfactual.md",
-    "Technical Notes/paper review.md",
     "Technical Notes/Machine Learning/safety & robustness.md",
     "Technical Notes/Machine Learning/lagrange multiplier.md",
     "未命名 2.base",
@@ -193,7 +183,6 @@
     "未命名 4.base",
     "未命名.base",
     "未命名 1.base",
-    "readme.md",
     "Technical Notes/Machine Learning/Understanding Measures, Support, and Diffusion A Unified Perspective.md",
     "Idea Notes/Decsion Calibration.md",
     "Paper Notes/By Technology/Large Language Model/Simulation & Digital Twin/Perceive, Reflect, and Plan Designing LLM Agent for Goal-Directed City Navigation without Instructions.md",
