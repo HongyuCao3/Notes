@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "f80bfa0c220a8bf5",
+        "id": "8610fd107479f9a0",
         "type": "tabs",
         "children": [
           {
-            "id": "2965cdb26c6641e7",
+            "id": "5c231977ff8c3a09",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "关系图谱"
+              "type": "markdown",
+              "state": {
+                "file": "Technical Notes/Machine Learning/diffusion model.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "diffusion model"
             }
           }
         ]
@@ -143,26 +147,56 @@
               "icon": "lucide-list",
               "title": "大纲"
             }
+          },
+          {
+            "id": "551b201a15c69fdc",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:创建新数据库": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
-      "command-palette:打开命令面板": false
+      "command-palette:打开命令面板": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "2965cdb26c6641e7",
+  "active": "ab3975abfb6f1e5f",
   "lastOpenFiles": [
+    "mamaghanDiffusionBasedCausal2023.md",
+    "Technical Notes/Machine Learning/diffusion model.md",
+    "E - /zotero/mamaghanDiffusionBasedCausal2023.md",
+    "E - /zotero",
+    "E - ",
+    "Technical Notes/Machine Learning/decision calibration and counterfactual.md",
+    "Technical Notes/paper review.md",
+    "Technical Notes/Machine Learning/safety & robustness.md",
+    "Technical Notes/Machine Learning/lagrange multiplier.md",
+    "未命名 2.base",
+    "未命名 3.base",
+    "未命名 4.base",
+    "未命名.base",
+    "未命名 1.base",
+    "readme.md",
+    "Technical Notes/Machine Learning/Understanding Measures, Support, and Diffusion A Unified Perspective.md",
+    "Idea Notes/Decsion Calibration.md",
+    "Paper Notes/By Technology/Large Language Model/Simulation & Digital Twin/Perceive, Reflect, and Plan Designing LLM Agent for Goal-Directed City Navigation without Instructions.md",
     "Paper Notes/By Technology/Large Language Model/SImulation & Digital Twin Research Gaps.md",
     "Paper Notes/Paper Reading.md",
     "Paper Notes/By Research Field/Agent/Action Space Reduction/From External to Swap Regret 2.0 An Efficient Reduction for Large Action Spaces.md",

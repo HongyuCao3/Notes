@@ -4,9 +4,7 @@
 
 **Measure ($\mu$)** formalizes the idea of "how much mass is in a set":
 
-$
-\mu(A) = \int_A p(x) \, dx
-$
+$\mu(A) = \int_A p(x) \, dx$
 
 - $A \subseteq X$ is a measurable subset.  
 - $p(x)$ is the **density function**, describing the local "thickness" of the measure.  
@@ -18,9 +16,7 @@ $
 
 The **support** of a measure $\mu$ is defined as:
 
-$
-\mathrm{supp}(\mu) = \{ x \in X \mid \forall \text{ open neighborhood } U \ni x, \ \mu(U) > 0 \}
-$
+$\mathrm{supp}(\mu) = \{ x \in X \mid \forall \text{ open neighborhood } U \ni x, \ \mu(U) > 0 \}$
 
 - Intuition: the region where the measure "actually exists," i.e., where there is nonzero probability or mass.  
 - Physical analogy: sand only exists in certain regions of a sandbox; empty regions are outside the support.
