@@ -8,10 +8,7 @@ _A systematic process for discovering new research directions through reinterpre
 
 - Examples: samples, features, actions, transformations, trajectories, decisions.  
 - Goal: Clearly define **what** you are modeling or operating on.
-
-**Notes:**
--  
--  
+ 
 
 ---
 
@@ -57,10 +54,7 @@ _A systematic process for discovering new research directions through reinterpre
 | Graph | GNN, Graph Diffusion |
 | Distribution | VAE, Flow, Energy-based Model |
 | Dynamics | ODE, SDE, RL Policy |
-
-**Notes:**
--  
--  
+ 
 
 ---
 
