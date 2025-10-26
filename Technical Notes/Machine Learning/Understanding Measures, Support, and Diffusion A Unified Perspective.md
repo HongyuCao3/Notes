@@ -27,16 +27,12 @@ $\mathrm{supp}(\mu) = \{ x \in X \mid \forall \text{ open neighborhood } U \ni x
 
 Given a measurable map $T: X \to Y$ and measure $\mu$ on $X$, the **pushforward measure** $T_\# \mu$ is defined as:
 
-$
-(T_\# \mu)(B) := \mu(T^{-1}(B)), \quad \forall B \subseteq Y
-$
+$(T_\# \mu)(B) := \mu(T^{-1}(B)), \quad \forall B \subseteq Y$
 
 - Intuition: If you "move every particle of mass according to $T$", $T_\# \mu$ describes the resulting distribution.  
 - If $\mu$ has density $p(x)$ and $T$ is smooth and invertible:
 
-$
-q(y) = p(T^{-1}(y)) \cdot \left| \det \frac{\partial T^{-1}}{\partial y} \right|
-$
+$q(y) = p(T^{-1}(y)) \cdot \left| \det \frac{\partial T^{-1}}{\partial y} \right|$
 
 - $|\det \frac{\partial T^{-1}}{\partial y}|$ accounts for local expansion or compression of the measure.  
 - Physical analogy: sand is pushed, stretched, or squeezed; the density changes accordingly.
@@ -49,21 +45,15 @@ Diffusion models can be viewed as **learnable pushforward operators** from a sim
 
 - **Forward SDE (adding noise):**
 
-  $
-  dx_t = f(x_t, t) dt + g(t) dW_t
-  $
+  $dx_t = f(x_t, t) dt + g(t) dW_t$
 
 - **Reverse SDE (learning to generate):**
 
-  $
-  dx_t = f_\theta(x_t, t) dt + g(t) d\bar{W}_t
-  $
+  $dx_t = f_\theta(x_t, t) dt + g(t) d\bar{W}_t$
 
 - The reverse process defines a continuous-time mapping \(T_\theta\) such that:
 
-  $
-  \mu_0 \approx T_\theta{}_\# \mu_T
-  $
+  $\mu_0 \approx T_\theta{}_\# \mu_T$
 
 - Intuition: high-dimensional "sand" (Gaussian noise) is gradually transported to form the target data distribution.  
 - Key property: both **density** and **support** can change during this process.
@@ -74,9 +64,7 @@ Diffusion models can be viewed as **learnable pushforward operators** from a sim
 
 ### 5.1 Reweight
 
-$
-d\mu'(x) = w(x) \, d\mu(x)
-$
+$d\mu'(x) = w(x) \, d\mu(x)$
 
 - Adjusts density without moving support.  
 - Intuition: sand piles get thicker or thinner but remain in the same locations.
@@ -123,21 +111,15 @@ $x_i' \sim \mu$
 
 Let $\mu$ be a measure on space $X$, and let $T: X \to Y$ be a (possibly stochastic) measurable map. Then the **general measure transformation** is:
 
-$
-\mu' = T_\# \mu
-$
+$\mu' = T_\# \mu$
 
 - If $T$ is deterministic:
 
-  $
-  \mu'(B) = \mu(T^{-1}(B)), \quad \forall B \subseteq Y
-  $
+  $\mu'(B) = \mu(T^{-1}(B)), \quad \forall B \subseteq Y$
 
 - If $T$ is stochastic (random mapping):
 
-  $
-  \mu'(B) = \int_X P(T(x) \in B) \, d\mu(x)
-  $
+  $\mu'(B) = \int_X P(T(x) \in B) \, d\mu(x)$
 
 - Intuition: $\mu'$ is the new measure obtained by moving (or randomly transporting) the original mass according to $T$.
 
@@ -149,9 +131,7 @@ $
 
 - A **density-only transformation** without moving support:
 
-  $
-  d\mu'(x) = w(x) \, d\mu(x), \quad x \in \text{supp}(\mu)
-  $
+  $d\mu'(x) = w(x) \, d\mu(x), \quad x \in \text{supp}(\mu)$
 
 - Conditions:  
   - $T(x) = x$ (identity mapping)  
@@ -166,9 +146,7 @@ $
 
 - A **discrete sampling transformation**:
 
-  $
-  x_i' \sim \mu
-  $
+  $x_i' \sim \mu$
 
 - Conditions:  
   - $T$ is a stochastic mapping that **samples points according to the original measure**  
@@ -183,9 +161,7 @@ $
 
 - General **continuous pushforward mapping**:
 
-  $
-  x_0 = T_\theta(z), \quad z \sim \mu_T
-  $
+  $x_0 = T_\theta(z), \quad z \sim \mu_T$
 
 - Key properties:  
   - $T_\theta$ can be stochastic (reverse SDE)  
