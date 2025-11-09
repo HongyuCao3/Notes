@@ -9,9 +9,7 @@ This note summarizes the most common assumptions, their mathematical forms, intu
 ## 1. IID Assumption (Independent and Identically Distributed)
 
 **Formal Definition:**
-$$
-(x_i, y_i) \sim P(X, Y), \quad (x_i, y_i) \perp (x_j, y_j) \text{ for } i \ne j
-$$
+$$(x_i, y_i) \sim P(X, Y), \quad (x_i, y_i) \perp (x_j, y_j) \text{ for } i \ne j$$
 
 **Meaning:**  
 All samples are drawn independently from the same distribution.
@@ -30,9 +28,7 @@ Non-IID learning, domain shift, temporal dependency
 ## 2. Covariate Shift
 
 **Assumption:**
-$$
-P_{\text{train}}(Y|X) = P_{\text{test}}(Y|X), \quad P_{\text{train}}(X) \ne P_{\text{test}}(X)
-$$
+$$P_{\text{train}}(Y|X) = P_{\text{test}}(Y|X), \quad P_{\text{train}}(X) \ne P_{\text{test}}(X)$$
 
 **Meaning:**  
 Input distribution changes, but the conditional label mechanism remains the same.
@@ -51,9 +47,7 @@ Label shift, concept drift
 ## 3. Label Shift
 
 **Assumption:**
-$$
-P_{\text{train}}(X|Y) = P_{\text{test}}(X|Y), \quad P_{\text{train}}(Y) \ne P_{\text{test}}(Y)
-$$
+$$P_{\text{train}}(X|Y) = P_{\text{test}}(X|Y), \quad P_{\text{train}}(Y) \ne P_{\text{test}}(Y)$$
 
 **Meaning:**  
 Feature generation is unchanged, but the class prior differs.
@@ -69,9 +63,7 @@ Reweighting via estimated class priors, EM-based estimation
 ## 4. Concept Drift
 
 **Assumption:**
-$$
-P_{\text{train}}(Y|X) \ne P_{\text{test}}(Y|X)
-$$
+$$P_{\text{train}}(Y|X) \ne P_{\text{test}}(Y|X)$$
 
 **Meaning:**  
 The underlying concept or labeling rule evolves over time or environments.
@@ -87,9 +79,7 @@ Online learning, continual learning, drift detection + adaptation
 ## 5. Stationarity Assumption
 
 **Assumption:**
-$$
-P_t(X, Y) = P_{t'}(X, Y), \quad \forall t, t'
-$$
+$$P_t(X, Y) = P_{t'}(X, Y), \quad \forall t, t'$$
 
 **Meaning:**  
 The joint distribution does not change over time.
@@ -108,9 +98,7 @@ Non-stationary or adaptive time-series modeling
 ## 6. Exchangeability
 
 **Assumption:**
-$$
-P(x_1, \dots, x_n) = P(x_{\pi(1)}, \dots, x_{\pi(n)}), \quad \forall \text{ permutation } \pi
-$$
+$$P(x_1, \dots, x_n) = P(x_{\pi(1)}, \dots, x_{\pi(n)}), \quad \forall \text{ permutation } \pi$$
 
 **Meaning:**  
 The order of samples does not affect the joint distribution.
@@ -130,9 +118,7 @@ Sequential modeling, causal order learning
 
 **Assumption:**
 If two inputs are close, their outputs should be similar:
-$$
-\|x_i - x_j\| \text{ small } \Rightarrow |f(x_i) - f(x_j)| \text{ small}
-$$
+$$\|x_i - x_j\| \text{ small } \Rightarrow |f(x_i) - f(x_j)| \text{ small}$$
 
 **Meaning:**  
 Local neighborhoods in input space correspond to similar labels.
@@ -151,9 +137,7 @@ Adversarial examples, domain generalization
 ## 8. Manifold Assumption
 
 **Assumption:**
-$$
-X \subset \mathcal{M}, \quad \dim(\mathcal{M}) \ll \dim(\mathcal{X})
-$$
+$$X \subset \mathcal{M}, \quad \dim(\mathcal{M}) \ll \dim(\mathcal{X})$$
 
 **Meaning:**  
 High-dimensional data lie on a low-dimensional manifold.
@@ -169,9 +153,7 @@ Autoencoders, VAEs, diffusion models, manifold regularization
 ## 9. Conditional Independence Assumption
 
 **Assumption:**
-$$
-X_i \perp X_j \mid Z
-$$
+$$X_i \perp X_j \mid Z$$
 
 **Meaning:**  
 Given a latent variable (e.g., cause), observed variables are conditionally independent.
@@ -188,9 +170,7 @@ Causal discovery, Bayesian networks, graphical models, HMMs
 
 **Assumption:**
 There exists a mapping $\phi(X)$ such that:
-$$
-P_{\text{env}}(Y | \phi(X)) \text{ is invariant across environments } e
-$$
+$$P_{\text{env}}(Y | \phi(X)) \text{ is invariant across environments } e$$
 
 **Meaning:**  
 Despite different domain distributions, a stable representation exists for prediction.

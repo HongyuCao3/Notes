@@ -33,8 +33,8 @@ The **true posterior** $p_{\theta}(z|x)$ is intractable, so we approximate it us
 
 | Component | Function | Distribution |
 |------------|-----------|---------------|
-| **Encoder** $E_{\phi}$ | Maps $x \to$ parameters of latent distribution | $q_{\phi}(z|x)$ |
-| **Decoder** $D_{\theta}$ | Maps $z \to$ reconstructed $x$ | $p_{\theta}(x|z)$ |
+| **Encoder** $E_{\phi}$ | Maps $x \to$ parameters of latent distribution | $q_{\phi}(z\|x)$ |
+| **Decoder** $D_{\theta}$ | Maps $z \to$ reconstructed $x$ | $p_{\theta}(x\|z)$ |
 
 The encoder and decoder are both **neural networks**.  
 Parameters:

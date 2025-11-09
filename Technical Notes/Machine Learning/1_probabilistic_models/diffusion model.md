@@ -37,7 +37,7 @@ $q(x_t | x_0) = \mathcal{N}(x_t; \sqrt{\bar{\alpha}_t}\, x_0, (1 - \bar{\alpha}_
 
 with:
 - $\alpha_t = 1 - \beta_t$: noise retention coefficient per step.  
-- $\bar{\alpha}_t = \prod_{s=1}^t \alpha_s$: cumulative product controlling the total signal strength.  
+- $\bar{\alpha_t} = \prod_{s=1}^t \alpha_s$: cumulative product controlling the total signal strength.  
 
 **Intuition:**  
 As $t$ increases, the data gradually lose structure and approach a standard normal distribution $N(0, I)$.
