@@ -9,11 +9,7 @@ Upsampling refers to increasing the sampling rate or resolution of data. It invo
 - Insert zeros or interpolate between samples.  
 - Formula (zero-insertion example, upsample factor L):  
   
-  $y[m] = 
-  \begin{cases} 
-  x[m/L], & m \text{ divisible by } L \\
-  0, & \text{otherwise} 
-  \end{cases}$
+  $y[m] = \begin{cases} x[m/L], & m \text{ divisible by } L \\ 0, & \text{otherwise} \end{cases}$
 - Often followed by low-pass filtering to smooth inserted values.
 
 **Machine Learning / Image Processing Context:**  
