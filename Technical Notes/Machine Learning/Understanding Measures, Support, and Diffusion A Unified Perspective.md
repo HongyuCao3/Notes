@@ -27,9 +27,9 @@ $\mathrm{supp}(\mu) = \{ x \in X \mid \forall \text{ open neighborhood } U \ni x
 
 Given a measurable map $T: X \to Y$ and measure $\mu$ on $X$, the **pushforward measure** $T_\# \mu$ is defined as:
 
-$(T_{\text{\#}} \mu)(B) := \mu(T^{-1}(B)), \quad \forall B \subseteq Y$
+$(T_{\sharp} \mu)(B) := \mu(T^{-1}(B)), \quad \forall B \subseteq Y$
 
-- Intuition: If you "move every particle of mass according to $T$", $T_\text{\#} \mu$ describes the resulting distribution.  
+- Intuition: If you "move every particle of mass according to $T$", $T_\sharp \mu$ describes the resulting distribution.  
 - If $\mu$ has density $p(x)$ and $T$ is smooth and invertible:
 
 $q(y) = p(T^{-1}(y)) \cdot \left| \det \frac{\partial T^{-1}}{\partial y} \right|$
@@ -53,7 +53,7 @@ Diffusion models can be viewed as **learnable pushforward operators** from a sim
 
 - The reverse process defines a continuous-time mapping \(T_\theta\) such that:
 
-  $\mu_0 \approx T_\theta{}_\# \mu_T$
+  $\mu_0 \approx T_\theta{}_\sharp \mu_T$
 
 - Intuition: high-dimensional "sand" (Gaussian noise) is gradually transported to form the target data distribution.  
 - Key property: both **density** and **support** can change during this process.
