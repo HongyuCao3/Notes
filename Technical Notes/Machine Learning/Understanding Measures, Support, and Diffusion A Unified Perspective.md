@@ -51,7 +51,7 @@ Diffusion models can be viewed as **learnable pushforward operators** from a sim
 
   $dx_t = f_\theta(x_t, t) dt + g(t) d\bar{W}_t$
 
-- The reverse process defines a continuous-time mapping \(T_\theta\) such that:
+- The reverse process defines a continuous-time mapping $T_\theta\$ such that:
 
   $\mu_0 \approx T_\theta{}_\sharp \mu_T$
 
