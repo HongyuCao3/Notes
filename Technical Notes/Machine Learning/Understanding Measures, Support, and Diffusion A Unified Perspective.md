@@ -25,7 +25,7 @@ $\mathrm{supp}(\mu) = \{ x \in X \mid \forall \text{ open neighborhood } U \ni x
 
 ## 3. Pushforward Measure
 
-Given a measurable map $T: X \to Y$ and measure $\mu$ on $X$, the **pushforward measure** $T_\# \mu$ is defined as:
+Given a measurable map $T: X \to Y$ and measure $\mu$ on $X$, the **pushforward measure** $T_\sharp \mu$ is defined as:
 
 $(T_{\sharp} \mu)(B) := \mu(T^{-1}(B)), \quad \forall B \subseteq Y$
 
@@ -111,7 +111,7 @@ $x_i' \sim \mu$
 
 Let $\mu$ be a measure on space $X$, and let $T: X \to Y$ be a (possibly stochastic) measurable map. Then the **general measure transformation** is:
 
-$\mu' = T_\# \mu$
+$\mu' = T_\sharp \mu$
 
 - If $T$ is deterministic:
 
