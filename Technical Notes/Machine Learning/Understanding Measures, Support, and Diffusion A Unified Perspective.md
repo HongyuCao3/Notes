@@ -27,9 +27,9 @@ $\mathrm{supp}(\mu) = \{ x \in X \mid \forall \text{ open neighborhood } U \ni x
 
 Given a measurable map $T: X \to Y$ and measure $\mu$ on $X$, the **pushforward measure** $T_\# \mu$ is defined as:
 
-$(T_\# \mu)(B) := \mu(T^{-1}(B)), \quad \forall B \subseteq Y$
+$(T_{\text{\#}} \mu)(B) := \mu(T^{-1}(B)), \quad \forall B \subseteq Y$
 
-- Intuition: If you "move every particle of mass according to $T$", $T_\# \mu$ describes the resulting distribution.  
+- Intuition: If you "move every particle of mass according to $T$", $T_\text{\#} \mu$ describes the resulting distribution.  
 - If $\mu$ has density $p(x)$ and $T$ is smooth and invertible:
 
 $q(y) = p(T^{-1}(y)) \cdot \left| \det \frac{\partial T^{-1}}{\partial y} \right|$
