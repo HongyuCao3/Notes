@@ -18,8 +18,7 @@ Both DDPM and DDIM typically share the same **training objective** and **forward
 ### Forward Diffusion (Noise Adding)
 Given clean data $x_0$:
 
-$x_t = \sqrt{\bar{\alpha}_t} \, x_0 + \sqrt{1 - \bar{\alpha}_t} \, \epsilon,
-\quad \epsilon \sim \mathcal{N}(0, I)$
+$x_t = \sqrt{\bar{\alpha}_t} \, x_0 + \sqrt{1 - \bar{\alpha}_t} \, \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)$
 
 Where:
 - $t \in \{1, \dots, T\}$: diffusion timestep
@@ -39,8 +38,7 @@ $\epsilon_\theta(x_t, t) \approx \epsilon$
 A key shared intermediate quantity is the predicted clean image:
 
 $\hat{x}_0(x_t, t)
-= \frac{x_t - \sqrt{1 - \bar{\alpha}_t} \, \epsilon_\theta(x_t, t)}
-       {\sqrt{\bar{\alpha}_t}}$
+= \frac{x_t - \sqrt{1 - \bar{\alpha}_t} \, \epsilon_\theta(x_t, t)} {\sqrt{\bar{\alpha}_t}}$
 
 **Intuition**:
 - If the model correctly predicts the noise in $x_t$,
@@ -53,13 +51,11 @@ $\hat{x}_0(x_t, t)
 ### Reverse Distribution
 DDPM explicitly models a conditional probability:
 
-$p_\theta(x_{t-1} \mid x_t)
-= \mathcal{N}\bigl(\mu_\theta(x_t, t), \Sigma_t\bigr)$
+$p_\theta(x_{t-1} \mid x_t) = \mathcal{N}\bigl(\mu_\theta(x_t, t), \Sigma_t\bigr)$
 
 Sampling step:
 
-$x_{t-1} = \mu_\theta(x_t, t) + \sigma_t z,
-\quad z \sim \mathcal{N}(0, I)$
+$x_{t-1} = \mu_\theta(x_t, t) + \sigma_t z, \quad z \sim \mathcal{N}(0, I)$
 
 Where:
 - $\mu_\theta$: mean derived from $\epsilon_\theta$
@@ -83,9 +79,7 @@ DDIM defines a **non-Markovian implicit mapping** instead of sampling from an ex
 
 ### Deterministic DDIM Update ($\eta = 0$)
 
-$x_{t-1}
-= \sqrt{\bar{\alpha}_{t-1}} \, \hat{x}_0
-+ \sqrt{1 - \bar{\alpha}_{t-1}} \, \epsilon_\theta(x_t, t)$
+$x_{t-1} = \sqrt{\bar{\alpha}_{t-1}} \, \hat{x}_0 + \sqrt{1 - \bar{\alpha}_{t-1}} \, \epsilon_\theta(x_t, t)$
 
 Where:
 - $\hat{x}_0$ is computed from the current $x_t$
@@ -96,18 +90,11 @@ Where:
 Define variance term:
 
 $\sigma_t
-= \eta \cdot
-\sqrt{\frac{1 - \bar{\alpha}_{t-1}}{1 - \bar{\alpha}_t}}
-\cdot
-\sqrt{1 - \frac{\bar{\alpha}_t}{\bar{\alpha}_{t-1}}}$
+= \eta \cdot \sqrt{\frac{1 - \bar{\alpha}_{t-1}}{1 - \bar{\alpha}_t}} \cdot \sqrt{1 - \frac{\bar{\alpha}_t}{\bar{\alpha}_{t-1}}}$
 
 Update rule:
 
-$x_{t-1}
-= \sqrt{\bar{\alpha}_{t-1}} \, \hat{x}_0
-+ \sqrt{1 - \bar{\alpha}_{t-1} - \sigma_t^2} \, \epsilon_\theta(x_t, t)
-+ \sigma_t z,
-\quad z \sim \mathcal{N}(0, I)$
+$x_{t-1} = \sqrt{\bar{\alpha}_{t-1}} \, \hat{x}_0 + \sqrt{1 - \bar{\alpha}_{t-1} - \sigma_t^2}, \epsilon_\theta(x_t, t) + \sigma_t z, \quad z \sim \mathcal{N}(0, I)$
 
 ### Characteristics
 - No explicit conditional density $p(x_{t-1} \mid x_t)$
