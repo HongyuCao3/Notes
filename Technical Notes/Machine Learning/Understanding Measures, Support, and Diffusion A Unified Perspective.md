@@ -2,7 +2,7 @@
 
 ## 1. Measure and Density
 
-**Measure ($\mu$)** formalizes the idea of "how much mass is in a set":
+**Measure ($\mu$)** (function from set to number) formalizes the idea of "how much mass is in a set":
 
 $\mu(A) = \int_A p(x) \, dx$
 
