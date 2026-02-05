@@ -68,12 +68,11 @@
          2. convergence
          3. efficient
       5. application or deployment contributino
-```markdown
+
 Our contributions are summarized as follows:
 1. We propose ...
 2. We develop ...
 3. We demonstrate ...
-```
 
 ### 5. Summary of the Proposed Solution
 - What **framework/model** do you develop?
@@ -82,110 +81,186 @@ Our contributions are summarized as follows:
 - What are the **experimental results** and their benefits?
 
 ---
+## 2. Component-wise Writing Guide (Updated for KDD Style)
 
-## ⚙️ Method
-
-> **Objective**: Present the overall structure and technical components of your approach with clarity and reproducibility.
-
-### 1. Overall Framework
-
-- Use a figure (e.g., `Figure 1`) to visually explain the architecture.
-- Provide a high-level description of each component.
-
-```markdown
-As shown in Figure X, our framework consists of:
-1. Shift-resistant feature set representation;
-2. Flatness-aware feature transformation generation;
-3. Integrated pre-normalization and post-denormalization.
-```
+This section provides a unified writing template for describing individual components in the proposed method.
+The emphasis is on **step-by-step procedural clarity**, **explicit linkage to challenges**, and **formulations restricted to novel technical contributions**.
 
 ---
 
-### 2. Component-wise Writing Guide
+### 📌 For Technical Components (Non-model)
 
-#### 📌 For Technical Components (Non-model)
+#### A. Purpose of This Section
+- Clearly state **which specific subtask or challenge** this component addresses.
+- Explicitly reference the corresponding challenge introduced in the *Introduction*.
+- Answer: *What problem would remain unsolved without this component?*
 
-**A. Purpose of This Section**
-- What **specific subtask** does this section solve?
-
-**B. Role in the Overall Framework**
-- How does this component **fit into the bigger picture**?
-- What challenge does it help mitigate?
-
-**C. Implementation Details**
-- What is the **core idea**?
-- What are the **main steps** to implement it?
-- Include **textual description**, **examples (optional)**, and **figures (optional)**.
-
-```markdown
-- Step 1: ...
-- Step 2: ...
-- Step 3: ...
-```
-
-**D. Formal Description**
-- Use clear **notations** and **equations** to define the key operation.
-
-```latex
-Let $\mathbf{x}$ be the input feature set. The transformed representation is given by:
-\[
-\mathbf{h} = f_{\text{GNN}}(G(\mathbf{x}))
-\]
-```
+> *Example*:  
+> This component addresses instability caused by noisy augmented samples under distribution shift.
 
 ---
 
-#### 🤖 For Machine Learning Models
+#### B. Role in the Overall Framework
+- Explain **where this component sits** in the overall pipeline.
+- Describe **its input and output** in relation to preceding and subsequent modules.
+- Clarify **how it mitigates a specific failure mode** of existing approaches.
 
-**A. Task of the Model**
-- What is the **input/output/goal** of the model?
-
-**B. Modeling Intuition**
-- Why is the model designed this way?
-- What assumptions or insights motivate it?
-
-**C. Predictive Function**
-- Define the model’s forward function.
-
-```latex
-\[
-\hat{y} = \mathcal{F}_\theta(\mathbf{x})
-\]
-```
-
-**D. Loss Function**
-- What is the **training objective**?
-
-```latex
-\[
-\mathcal{L} = \sum_i \ell(\hat{y}_i, y_i)
-\]
-```
-
-**E. Optimization Strategy**
-- How is the model trained? (e.g., gradient descent, inner-outer loop, Bellman equation)
-
-**F. Training Algorithm (Optional)**
-- If you use a practical optimization method, provide pseudocode:
-
-```markdown
-**Algorithm 1: Model Training**
-
-Input: ...
-Output: ...
-Repeat:
-  1. Sample data ...
-  2. Forward pass ...
-  3. Compute loss ...
-  4. Update parameters ...
-Until convergence
-```
-## Experiments
-  - <font color =red>every part address one issue in the introduction</font>
-  - ablation study
-  - hyper parameter sensitivity analysis
+> *Example*:  
+> Positioned between data augmentation and model training, this module stabilizes learning by aggregating reliability signals at the structural level.
 
 ---
+
+#### C. Step-by-Step Implementation Details
+- Describe the implementation as a **deterministic sequence of steps**.
+- Each step should specify:
+  - what is constructed or computed,
+  - why it is necessary,
+  - and how it contributes to the final objective.
+- Avoid formulas unless the step introduces a **novel definition or mechanism**.
+
+- Step 1: Construct intermediate structures (e.g., clusters, graphs, prototypes) from the input data.
+- Step 2: Estimate reliability, invariance, or stability scores by aggregating signals within each structure.
+- Step 3: Convert the estimated scores into actionable quantities (e.g., weights, constraints, sampling rules).
+- Step 4: Integrate the resulting quantities into the downstream training or optimization process.
+
+* Use **figures** to illustrate data flow or structural relationships when helpful.
+* Provide **computational remarks** if the component improves scalability or efficiency.
+
+---
+
+#### D. Formal Description (Innovation-only)
+
+* Introduce **notations and equations only for novel operations** proposed in this paper.
+* Standard procedures (e.g., clustering, cross-entropy loss, backpropagation) should be described textually or cited.
+
+Let $c_k$ denote a prototype obtained by structural clustering.
+We define its reliability score as:
+$$r_k = \phi\big(\mathbb{E}_{\mathbf{x} \in c_k}[\ell(\mathbf{x})],\;
+              \mathbb{E}_{\mathbf{x} \in c_k}[\Delta(\mathbf{x})]\big),$$
+where $\phi(\cdot)$ is a prototype-level aggregation function introduced in this work.
+
+* Clearly state **why this formulation differs from and improves upon prior work**.
+
+---
+
+### 🤖 For Machine Learning Models
+
+This subsection applies when the component includes a learnable model.
+
+---
+
+#### A. Task Definition
+
+* Specify the **input**, **output**, and **learning objective** of the model.
+* Clarify whether the model performs prediction, estimation, decision-making, or control.
+
+> *Example*:
+> The model maps feature representations to calibrated decision scores under distribution shift.
+
+---
+
+#### B. Modeling Intuition
+
+* Explain **why this model architecture or design is appropriate** for the task.
+* State any **assumptions or insights** (e.g., smoothness, invariance, structural consistency).
+* Emphasize how the design aligns with the challenges identified earlier.
+
+---
+
+#### C. Predictive Function
+
+* Define the forward computation concisely.
+
+
+$$\hat{y} = \mathcal{F}_\theta(\mathbf{x})$$
+
+* Avoid expanding standard architectures unless they are modified.
+
+---
+
+#### D. Training Objective (Novel Parts Only)
+
+* Present the **training objective**, highlighting newly introduced terms.
+* Standard loss components can be briefly mentioned or cited.
+
+
+$$\mathcal{L} = \sum_i w_i \, \ell(\hat{y}_i, y_i),$$
+where the sample weights $w_i$ are computed using the proposed reliability mechanism.
+
+---
+
+#### E. Optimization Strategy
+
+* Describe **how the model is trained in practice**:
+
+  * joint vs. alternating optimization,
+  * update frequency of auxiliary quantities (e.g., weights, prototypes),
+  * stopping criteria.
+* Focus on **training logic**, not mathematical derivations.
+
+---
+
+#### F. Training Algorithm (Optional)
+
+* Provide pseudocode **only if it improves clarity or reproducibility**.
+* The algorithm should reflect the **global training loop**, not internal module details.
+
+
+**Algorithm 1: Training Procedure**
+
+Input: Training data, initialized model parameters  
+Output: Optimized model parameters  
+
+Repeat until convergence:
+  1. Sample a mini-batch from the training data
+  2. Compute intermediate structures and reliability estimates
+  3. Perform forward pass and compute weighted loss
+  4. Update model parameters
+
+
+---
+
+## Experiments (Updated Analysis-Oriented Guide)
+
+### Experimental Design Principles
+
+* Each experimental subsection must **directly address one issue raised in the Introduction**.
+* Results should emphasize **contributions and empirical findings**, not isolated numerical improvements.
+* Use experiments to answer *why* and *when* the method works.
+
+---
+
+### Recommended Experimental Structure
+
+* **Main Results**:
+  Validate overall effectiveness against strong baselines on core tasks.
+
+* **Robustness / Stress Tests**:
+  Evaluate performance under distribution shift, noise, or adversarial conditions.
+
+* **Ablation Studies**:
+  Systematically remove or replace components to verify their necessity and role.
+
+* **Mechanism Analysis**:
+  Analyze intermediate quantities (e.g., weights, reliability scores, calibration errors) to explain observed gains.
+
+* **Efficiency and Scalability** (if applicable):
+  Report computational cost, memory usage, and runtime behavior.
+
+* **Hyperparameter Sensitivity Analysis**:
+  Demonstrate stability across a reasonable range of key hyperparameters, emphasizing usability rather than fine-tuning.
+
+---
+
+### Writing Guideline for Experimental Results
+
+* Begin each subsection with a **clear empirical finding**.
+* Support the finding with quantitative results (tables or figures).
+* Provide a concise **mechanistic explanation** linking the observation to the proposed method.
+* Conclude with a short **takeaway** explaining the implication for the overall contribution.
+
+
+
 
 ## ✅ Conclusion
 
@@ -199,7 +274,7 @@ Use this **sentence-level checklist** to organize your paragraph(s):
 4. **Study summary**: What did this paper propose?
 5. **Detailed contributions**:
 
-```markdown
+
 Specifically, our contributions include:
 - ...
 - ...
@@ -212,9 +287,7 @@ Specifically, our contributions include:
 9. **Practical implications**: What can practitioners or industry apply from this work?
 10. **Limitations and future work**:
 
-```markdown
 This study is limited by...
 Future research could explore...
-```
 
 ---
