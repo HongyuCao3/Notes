@@ -25,14 +25,14 @@ Each mathematical symbol should correspond to **exactly one semantic role** thro
 
 Valid subscripts:
 
-* Sample index: (i, j)
-* Layer index: (l)
-* Time step: (t)
+* Sample index: $i, j$
+* Layer index: $l$
+* Time step: $t$
 
 Avoid semantic subscripts such as:
 
-* ( \lambda_{adv} )
-* ( \theta_{shared} )
+* $\lambda_{adv}$
+* $\theta_{shared}$
 
 ---
 
@@ -42,8 +42,8 @@ Reusing a symbol with a conflicting meaning introduces **implicit cognitive load
 
 Example:
 
-* ( \lambda ) → regularization / loss weight (do **not** use as learning rate)
-* ( \beta_1, \beta_2 ) → Adam parameters only
+* $\lambda$ → regularization / loss weight (do **not** use as learning rate)
+* $\beta_1, \beta_2$ → Adam parameters only
 
 ---
 
@@ -53,8 +53,8 @@ Example:
 
 | Concept                 | Recommended Symbol |
 | ----------------------- | ------------------ |
-| All model parameters    | ( \theta )         |
-| Parameters of layer (l) | ( \theta^{(l)} )   |
+| All model parameters    | $\theta$         |
+| Parameters of layer $l$ | $\theta^{(l)}$   |
 
 ---
 
@@ -62,13 +62,11 @@ Example:
 
 | Concept       | Symbol      |
 | ------------- | ----------- |
-| Weight matrix | ( W^{(l)} ) |
-| Bias vector   | ( b^{(l)} ) |
+| Weight matrix | $W^{(l)}$ |
+| Bias vector   | $b^{(l)}$ |
 
 Example:
-[
-f(x; \theta) = W^{(L)} \sigma( \cdots W^{(1)} x + b^{(1)} ) + b^{(L)}
-]
+$$f(x; \theta) = W^{(L)} \sigma( \cdots W^{(1)} x + b^{(1)} ) + b^{(L)}$$
 
 ---
 
@@ -76,9 +74,9 @@ f(x; \theta) = W^{(L)} \sigma( \cdots W^{(1)} x + b^{(1)} ) + b^{(L)}
 
 | Usage                 | Symbol     |
 | --------------------- | ---------- |
-| Scaling / temperature | ( \tau )   |
-| Gating coefficient    | ( \alpha ) |
-| Mixture weights       | ( \pi )    |
+| Scaling / temperature | $\tau$   |
+| Gating coefficient    | $\alpha$ |
+| Mixture weights       | $\pi$    |
 
 ---
 
@@ -88,8 +86,8 @@ f(x; \theta) = W^{(L)} \sigma( \cdots W^{(1)} x + b^{(1)} ) + b^{(L)}
 
 | Concept              | Symbol            |
 | -------------------- | ----------------- |
-| Total loss           | ( \mathcal{L} )   |
-| Individual loss term | ( \mathcal{L}_k ) |
+| Total loss           | $\mathcal{L}$   |
+| Individual loss term | $\mathcal{L}_k$ |
 
 ---
 
@@ -97,14 +95,14 @@ f(x; \theta) = W^{(L)} \sigma( \cdots W^{(1)} x + b^{(1)} ) + b^{(L)}
 
 | Usage                 | Symbol         |
 | --------------------- | -------------- |
-| Loss weighting        | ( \lambda )    |
-| Multiple loss weights | ( \lambda_k )  |
-| Time-dependent weight | ( \lambda(t) ) |
+| Loss weighting        | $\lambda$    |
+| Multiple loss weights | $\lambda_k$  |
+| Time-dependent weight | $\lambda(t)$ |
 
 Recommended form:
-[
+$$
 \mathcal{L} = \sum_{k=1}^K \lambda_k \mathcal{L}_k
-]
+$$
 
 ---
 
@@ -112,8 +110,8 @@ Recommended form:
 
 | Type                   | Symbol      |
 | ---------------------- | ----------- |
-| L1 / L2 regularization | ( \lambda ) |
-| Auxiliary penalty      | ( \gamma )  |
+| L1 / L2 regularization | $\lambda$ |
+| Auxiliary penalty      | $\gamma$  |
 
 ---
 
@@ -121,15 +119,13 @@ Recommended form:
 
 | Concept           | Symbol               | Notes         |
 | ----------------- | -------------------- | ------------- |
-| Learning rate     | ( \eta )             | DL standard   |
-| Momentum          | ( \mu )              | SGD           |
-| Adam coefficients | ( \beta_1, \beta_2 ) | Fixed meaning |
-| Iteration         | ( t )                | Step index    |
+| Learning rate     | $\eta$             | DL standard   |
+| Momentum          | $\mu$              | SGD           |
+| Adam coefficients | $\beta_1, \beta_2$ | Fixed meaning |
+| Iteration         | $t$                | Step index    |
 
 Update rule example:
-[
-\theta_{t+1} = \theta_t - \eta , \nabla_{\theta} \mathcal{L}
-]
+$$\theta_{t+1} = \theta_t - \eta , \nabla_{\theta} \mathcal{L}$$
 
 ---
 
@@ -137,10 +133,10 @@ Update rule example:
 
 | Concept            | Symbol   |
 | ------------------ | -------- |
-| Decision threshold | ( \tau ) |
-| Margin             | ( m )    |
-| Logit temperature  | ( \tau ) |
-| Clipping value     | ( c )    |
+| Decision threshold | $\tau$ |
+| Margin             | $m$    |
+| Logit temperature  | $\tau$ |
+| Clipping value     | $c$   |
 
 ---
 
@@ -148,10 +144,10 @@ Update rule example:
 
 | Concept      | Symbol       |
 | ------------ | ------------ |
-| Probability  | ( p )        |
-| Logits       | ( z )        |
-| Variance     | ( \sigma^2 ) |
-| Distribution | ( p(x) )     |
+| Probability  | $p$        |
+| Logits       | $z$        |
+| Variance     | $\sigma^2$ |
+| Distribution | $p(x)$     |
 
 ---
 
@@ -161,10 +157,10 @@ Update rule example:
 
 | Object | Convention                     |
 | ------ | ------------------------------ |
-| Scalar | lowercase italic: ( a )        |
-| Vector | bold lowercase: ( \mathbf{x} ) |
-| Matrix | bold uppercase: ( \mathbf{W} ) |
-| Set    | calligraphic: ( \mathcal{S} )  |
+| Scalar | lowercase italic: $a$        |
+| Vector | bold lowercase: $\mathbf{x}$ |
+| Matrix | bold uppercase: $\mathbf{W}$ |
+| Set    | calligraphic: $\mathcal{S}$  |
 
 ---
 
@@ -182,17 +178,13 @@ Use:
 
 ### 8.1 Index Sets
 
-[
-\mathcal{L} = \sum_{\mathcal{L}_k \in \mathcal{S}} \lambda_k \mathcal{L}_k
-]
+$$\mathcal{L} = \sum_{\mathcal{L}_k \in \mathcal{S}} \lambda_k \mathcal{L}_k$$
 
 ---
 
 ### 8.2 Functional Dependence Instead of Indexing
 
-[
-\lambda = f(t) \quad \text{instead of} \quad \lambda_t
-]
+$$\lambda = f(t) \quad \text{instead of} \quad \lambda_t$$
 
 ---
 
