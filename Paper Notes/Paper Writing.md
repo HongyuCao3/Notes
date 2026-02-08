@@ -220,7 +220,7 @@ Repeat until convergence:
 
 ---
 
-## Experiments (Updated Analysis-Oriented Guide)
+## Experiments （observation + indication + findings）
 
 ### Experimental Design Principles
 
