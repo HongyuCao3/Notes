@@ -1,155 +1,187 @@
-# Paper Reading Notes
+# Paper Reading Notes (Claim-Oriented)
 
 ## Paper Information
-- **Title**: 
-- **Authors**: 
-- **Venue / Year**: 
-- **Research Area**: 
+- **Title**:  
+- **Authors**:  
+- **Venue / Year**:  
+- **Research Area**:  
+- **Paper Type**: ☐ Method ☐ Theory ☐ Empirical ☐ System ☐ Survey
 
 ---
 
-## R — Research Question
-> What is the *core problem* this paper tries to solve?
+## 🎯 Central Claim (One-Sentence, Mandatory)
+
+> **If I can only cite this paper once, what exact statement am I citing it for?**
+
+- **Claim Statement**:  
+  > *This paper claims that …*
+
+- **Claim Type** (choose ONE):
+  - ☐ Method superiority  
+  - ☐ Conceptual reframing  
+  - ☐ Theoretical guarantee  
+  - ☐ Empirical finding  
+  - ☐ Diagnostic / negative result  
+
+- **Claim Scope**:
+  - **Applies to**: (task / data / setting)
+  - **Assumes**: (key assumptions)
+  - **Does NOT claim**: (explicit non-claims)
+
+⚠️ **Rule**:  
+- One sentence only  
+- No “and / as well as”  
+- Must be falsifiable
+
+---
+
+## 🧠 Abstract-Only Claim Extraction (Fast Pass)
+
+> Filled **before** reading the full paper
+
+- **Action** (What did they do?):  
+- **Comparison** (Better than what?):  
+- **Outcome** (What should I believe?):  
+- **Conditions** (When / where does this hold?):  
+
+> **Draft Claim from Abstract**:  
+> By doing ___, this paper shows that ___ leads to ___ compared to ___ under ___.
+
+(Revise later if needed)
+
+---
+
+## R — Research Question (Claim Premises)
+
+> What must be true for the central claim to matter?
 
 - **Problem Setting**:  
-  Describe the task or scenario considered in this paper.
 - **Previous Gap**:  
-  - What do existing methods *fail* to address?
-  - Why is this gap non-trivial or important?
+  - What existing methods fail to address?
+  - Why does this gap block the claim?
 - **Formal Objective (if applicable)**:  
-  - Define the learning / optimization objective  
-  - Key variables and symbols:
-    - $$x$$: input data
-    - $$y$$: target / label
-    - $$f_\theta$$: model with parameters $$\theta$$  
-- **Intuition**:  
-  Explain the problem in plain language or with a concrete example.
+  - $$\min_\theta \mathcal{L}(f_\theta(x), y)$$
+- **Why This Problem Enables the Claim**:  
+  (Why solving this problem makes the claim meaningful)
 
 ---
 
-## I — Insight
-> What is the *key idea* that makes this paper work?
+## I — Insight (Claim Causality)
+
+> Why *should* the central claim be true?
 
 - **Core Insight**:  
-  A concise sentence summarizing the main intuition.
-- **Why This Insight Matters**:  
-  - Why was this insight *not obvious*?
-  - How does it overcome the previous gap?
-- **Conceptual Explanation**:  
-  Provide a high-level explanation without implementation details.
-- **Comparison to Prior Work**:  
-  - How is this idea fundamentally different from existing approaches?
+  (Mechanism-level intuition)
+- **Why This Insight Was Non-Obvious**:  
+- **How It Directly Supports the Claim**:  
+- **Contrast with Prior Work**:  
+  (What intuition they missed)
 
 ---
 
-## C — Contribution
-> What are the *concrete contributions* of this paper?
+## C — Contributions (Claim Decomposition)
 
-1. **Methodological Contribution**  
-   - What new model / framework / algorithm is proposed?
-2. **Theoretical Contribution (if any)**  
-   - New assumptions, proofs, guarantees, or analysis.
-3. **Empirical Contribution**  
-   - New benchmarks, datasets, or experimental findings.
-4. **Practical Impact**  
-   - Why should practitioners or future researchers care?
+> Which parts of the paper support which parts of the claim?
 
-> Each contribution should be **specific and verifiable**, not vague.
+1. **Primary Contribution** (Directly supports central claim)  
+2. **Secondary Contributions** (Support scope / robustness)  
+3. **Auxiliary Contributions** (Nice-to-have, not core)
+
+⚠️ Mark clearly:
+- ☐ Claim-critical  
+- ☐ Claim-supporting  
+- ☐ Claim-irrelevant (for citation)
 
 ---
 
-## H — How It Works
-> How does the method actually operate?
+## H — How It Works (Claim Realization)
+
+> How is the claim operationalized?
 
 ### Problem Formulation
-- Define the problem mathematically:
-  $$\min_\theta \; \mathcal{L}(f_\theta(x), y)$$
-- Explain each term:
-  - $$\mathcal{L}$$: loss function (what it measures and why)
-  - $$f_\theta$$: model structure
-- **Design Constraints / Assumptions**:
-  - Data availability, noise model, computational limits, etc.
+- Objective:
+  $$\min_\theta \mathcal{L}(f_\theta(x), y)$$
+- Key assumptions that the claim depends on:
 
 ### Algorithm Overview
-- **Step 1**: Input / preprocessing  
-- **Step 2**: Core transformation or learning step  
-- **Step 3**: Optimization / inference  
-- **Step 4**: Output generation  
+- Step 1:  
+- Step 2:  
+- Step 3:  
 
-(Optional) Pseudocode-level intuition:
-- What happens at each step?
-- Which step is the bottleneck or key innovation?
+- **Key Innovation Step** (Claim hinge point):  
+- **What would break the claim if removed?**
 
-### Complexity & Scalability
-- Time complexity: $$\mathcal{O}(\cdot)$$
-- Space complexity: $$\mathcal{O}(\cdot)$$
-- Practical deployment considerations.
+### Complexity & Practicality
+- Time:
+- Space:
+- Deployment constraints relevant to claim:
 
 ---
 
-## Experiments & Results
-> Do the experiments *actually support* the claims?
+## 🔬 Experiments & Results (Claim Evidence)
 
-### Experimental Setup
-- Datasets:
-- Baselines:
-- Evaluation Metrics:
-  - Explain what each metric measures and why it is appropriate.
+> Do the experiments actually justify the claim?
 
-### Key Results
-- **Main Performance Gains**:
-  - Where does the method outperform baselines?
-- **Ablation Studies**:
-  - What components are truly necessary?
-- **Sensitivity / Robustness**:
-  - Noise, hyperparameters, data size, etc.
+### Evidence Table
 
-### Effect Analysis
-- What results are *surprising*?
-- Any failure cases or limitations revealed?
+| Evidence | Supports Which Claim Part | Strength |
+|--------|--------------------------|----------|
+| Main results | Core claim | Strong / Medium / Weak |
+| Ablation | Causal mechanism | Medium |
+| Theory | Boundary condition | Conditional |
+| Case study | Intuition only | Weak |
+
+### Stress Tests
+- Where does the claim weaken?
+- Any untested assumptions?
 
 ---
 
-## 🔑 Key Takeaway Summary
-> One or two sentences capturing **why this paper is worth remembering**.
+## 🔍 Claim–Evidence Sanity Check (Required)
 
+- Is the **central claim directly tested**? ☐ Yes ☐ No  
+- Is support **empirical / theoretical / mixed**?  
+- Any overreach in wording vs evidence?
 
-## Writing Takeaways
-
-### 1. Problem Motivation
-- How does the paper **frame the research gap**?
-  - From application pain points?
-  - From theoretical inconsistency?
-- Sentence patterns worth reusing:
-  - “However, existing methods fail to …”
-  - “This limitation becomes critical when …”
-
-### 2. Contribution Positioning
-- How are contributions **ordered and scoped**?
-  - Method → theory → experiments?
-- Are contributions **incremental or conceptual**?
-- Any effective phrasing for claims with confidence control?
-
-### 3. Method Presentation
-- Does the paper:
-  - Start with intuition before equations?
-  - Use figures to explain pipeline?
-- How complex ideas are broken into submodules?
-
-### 4. Experimental Storytelling
-- How are experiments grouped?
-  - Validation → analysis → stress test
-- How does each experiment answer a *specific question*?
-
-### 5. Style & Structure Tricks
-- Section length balance:
-- Use of forward references (“In Section 4, we show …”)
-- How limitations are acknowledged without weakening claims.
+> **If reviewer #2 questioned the claim, what is the weakest link?**
 
 ---
 
-## Transferable Writing Lessons
-> How can I apply these techniques to *my own paper*?
+## 🔑 Final Claim (Post-Reading, Canonical)
 
-- What part of my current work can adopt this structure?
-- Which paragraph or section style should I imitate?
+> **Final version of the one-sentence claim** (this is what you will actually cite):
+
+> *This paper shows that …*
+
+(If this differs from the abstract version, note why.)
+
+---
+
+## 🧾 Citation-Ready Summary (Optional but Powerful)
+
+> **One sentence I can paste into a literature review**:
+
+> “Author et al. (Year) show that …”
+
+---
+
+## ✍️ Writing & Reviewing Takeaways (Optional)
+
+### Claim Framing
+- How is confidence calibrated?
+- Any effective hedging language?
+
+### Experimental Storytelling
+- Which experiment answers which doubt about the claim?
+
+### Transfer to My Work
+- Can my paper support a claim this clean?
+- Which section of mine is currently claim-weak?
+
+---
+
+## 🏷️ Tags (for retrieval)
+- #core-claim:
+- #method:
+- #theory:
+- #empirical:
