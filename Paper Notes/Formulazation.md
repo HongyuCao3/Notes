@@ -14,10 +14,10 @@ Each mathematical symbol should correspond to **exactly one semantic role** thro
 * Do not encode semantics in subscripts
 
 **Bad:**
-[ \lambda_{cls}, \lambda_{reg}, \lambda_{aux} ]
+$\lambda_{cls}, \lambda_{reg}, \lambda_{aux}$
 
 **Good:**
-[ \mathcal{L} = \sum_{k=1}^K \lambda_k \mathcal{L}_k ]
+$\mathcal{L} = \sum_{k=1}^K \lambda_k \mathcal{L}_k$
 
 ---
 
@@ -100,9 +100,7 @@ $$f(x; \theta) = W^{(L)} \sigma( \cdots W^{(1)} x + b^{(1)} ) + b^{(L)}$$
 | Time-dependent weight | $\lambda(t)$ |
 
 Recommended form:
-$$
-\mathcal{L} = \sum_{k=1}^K \lambda_k \mathcal{L}_k
-$$
+$$\mathcal{L} = \sum_{k=1}^K \lambda_k \mathcal{L}_k$$
 
 ---
 
@@ -167,10 +165,10 @@ $$\theta_{t+1} = \theta_t - \eta , \nabla_{\theta} \mathcal{L}$$
 ### 7.2 Vectors over Subscripts
 
 Instead of:
-[ \lambda_1, \lambda_2, \dots, \lambda_K ]
+$\lambda_1, \lambda_2, \dots, \lambda_K$
 
 Use:
-[ \boldsymbol{\lambda} \in \mathbb{R}^K ]
+$\boldsymbol{\lambda} \in \mathbb{R}^K$
 
 ---
 
