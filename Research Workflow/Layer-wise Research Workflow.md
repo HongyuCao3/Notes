@@ -190,290 +190,135 @@ Only two things:
 
 L1 decides what to use.
 
-很好，这里确实需要一次**结构性修正**，否则 L1 会重新吸收 L0 的“设计空间”概念，同时又混入叙事性表达。
 
-我们重写 L1，使其与修正后的 L0 严格对齐，并且明确：
+# L1 — Formal Problem & Method Specification Layer (final)
 
-* 输入来自 **external contracts + literature records**
-* 产出是 **纯公式化规范**
-* 使用 **qmd（Quarto）**
-* 不允许自然语言解释
-* 不做动机陈述
-
-下面是修正版。
+**Short mandate:**
+Produce `formal_spec_vX.qmd`. The document **may begin** with a single Notation Table (concise, one-line natural-language definitions for symbols/variables). After that, **only** symbolic content is allowed: definitions, assumptions, functions, constraints, objectives, mappings, and optional theorems. No paragraphs of motivation, no intuitive descriptions, no rhetorical claims.
 
 ---
 
-# L1 — Formal Problem & Method Specification Layer
+## File & format
 
-## Position in the System
+`formal_spec_vX.qmd` — Quarto markdown file.
 
-L1 is the **first constructive layer**.
+Structure (required sections in this order):
 
-L0 only records external systems.
-L1 defines the new system.
+1. **Notation Table** (allowed to use short natural-language descriptions; single-line per variable)
+2. Symbol sets and domain declarations
+3. Dataset formalization
+4. Assumptions (symbolic)
+5. Objective function(s)
+6. Method functional decomposition (compositional equations)
+7. Output / Interface definitions (shapes, signatures)
+8. Evaluation functional mapping (metric signatures)
+9. Version metadata (spec id, date, upstream L0 references)
 
-L1 is the **normative source of truth** for:
-
-* Problem definition
-* Mathematical structure
-* Variable space
-* Functional mapping
-
-It is not rhetorical.
-It is not engineering-level.
-It is not explanatory.
-
-It is purely formal.
+> **Enforcement rule:** Only Section (1) may contain natural language explanations. Every other section must use formal notation and terse definitions only. If a concept cannot be expressed formally, it belongs to L2.
 
 ---
 
-## Inputs (Strictly Defined)
+## Notation Table — required format
 
-From L0:
+* Present as a 2-column table: **Symbol** | **Definition (one line)**.
+* Each definition must be ≤ 20 words, concrete and operational.
+* Use precise terms (e.g., “input feature vector”, “ground-truth label”, “model parameters”, “attack budget”).
+* Include references to L0 artifacts when relevant (e.g., `D: dataset (see external_contract_X.md)`).
 
-1. External contract documents
+### Notation Table template 
 
-   * Data schemas
-   * Input/output structures
-   * Model interfaces
-   * Evaluation interfaces
+| Symbol | Definition (one line) |
+|--------|------------------------|
+| $\mathcal{X}$ | Input space; feature vectors, dimension d. |
+| $\mathcal{Y}$ | Label space; K discrete classes. |
+| $D = \{(x_i,y_i)\}_{i=1}^n$ | Observed training dataset (see external_contract_dataset.md). |
+| $f_\theta$ | Parametric model mapping \mathcal{X}\to\mathcal{Y}; parameters \theta. |
+| $\ell(\cdot,\cdot)$ | Loss function on predictions and labels. |
+| $\Delta$ | Adversarial perturbation set (L_\infty, \epsilon). |
+| $B$ | Batch size for training and logging. |
+| $\mathcal{M}$ | Evaluation metric function; maps outputs to scalar. |
 
-2. Structured literature records
-
-   * Formal problem definitions used in prior work
-   * Mathematical formulations
-   * Reported objectives
-
-No “design space”.
-No “constraint synthesis”.
-No interpretive abstraction.
-
-L1 reads external structures and defines a new formal system.
 
 ---
 
-## Implementation Medium
+## Symbolic sections — rules & examples
 
-L1 must be written in:
+* **Symbol sets & domains:** declare spaces and types.
 
-```id="qmdformal"
-formal_spec_vX.qmd
-```
+  ```math
+  \mathcal{X}\subseteq\mathbb{R}^d,\quad \mathcal{Y}=\{1,\dots,K\}
+  ```
+* **Dataset formalization:** provide sampling model and splits.
 
-Requirements:
+  ```math
+  D_{\text{train}} \sim \mathcal{P}_{\text{train}},\quad D_{\text{test}}\sim\mathcal{P}_{\text{test}}
+  ```
+* **Assumptions:** only symbolic statements.
 
-* All content must be in mathematical notation.
-* No explanatory paragraphs.
-* No rhetorical sentences.
-* No motivation statements.
-* No narrative transitions.
-* Every statement must be expressible as:
+  ```math
+  \mathcal{P}_{\text{train}}\neq\mathcal{P}_{\text{test}}
+  ```
+* **Objective:** explicit optimization target.
 
-  * Definition
-  * Assumption
-  * Function
-  * Mapping
-  * Constraint
-  * Objective
-  * Theorem (optional)
+  ```math
+  \theta^*=\arg\min_\theta \mathbb{E}_{(x,y)\sim D_{\text{train}}}[\ell(f_\theta(x),y)]
+  ```
+* **Method decomposition:** function compositions and required auxiliary outputs.
 
-If something cannot be written symbolically, it does not belong in L1.
+  ```math
+  z=g_\phi(x),\quad \hat{y}=h_\psi(z),\quad f_\theta=h_\psi\circ g_\phi
+  ```
+* **Interface definitions:** tensor shapes and logging outputs.
 
----
+  ```math
+  f_\theta(x)\in\mathbb{R}^{B\times K},\quad \text{log}(t)\mapsto(\text{step},\text{loss},\text{metrics})
+  ```
+* **Evaluation mapping:** formal signature of metric.
 
-## Operations
-
-### 1. Symbol Table Definition
-
-Define all primitives:
-
-* Sets
-* Spaces
-* Indices
-* Random variables
-* Operators
-
-Example structure:
-
-```math
-\mathcal{X} \subseteq \mathbb{R}^d
-\mathcal{Y} = \{1, \dots, K\}
-D = \{(x_i, y_i)\}_{i=1}^n
-```
+  ```math
+  \mathcal{M}: \{\hat{y},y\}\mapsto\mathbb{R},\quad \mathcal{M}_{\text{acc}}(\hat{y},y)=\frac{1}{n}\sum_{i}\mathbf{1}[\arg\max \hat{y}_i = y_i]
+  ```
 
 ---
 
-### 2. Problem Definition
+## Inputs (formal)
 
-Formalize:
+* Upstream artifacts: explicit pointers to L0 contract documents must be included in Version metadata (section 9).
 
-```math
-\text{Given } D \sim \mathcal{P}_{XY}
-```
-
-Define:
-
-* Input space
-* Output space
-* Learning objective domain
+  * e.g., `Upstream: external_contract_dataset_v2.md, external_contract_model_v1.md`
 
 ---
 
-### 3. Assumptions
+## Artifact constraints & mutation policy
 
-Explicit assumptions only:
+* **Primary artifact:** `formal_spec_vX.qmd` (symbol-first).
+* **Mutation policy:**
 
-```math
-\mathcal{P}_{train} \neq \mathcal{P}_{test}
-```
-
-```math
-f_\theta : \mathcal{X} \to \mathcal{Y}
-```
-
-No textual explanation.
+  * Pre-freeze: iterative edits allowed; maintain changelog in file header.
+  * Freeze operation: increment version `vX→vX+1`; commit snapshot.
+  * Any post-freeze change invalidates downstream L2/L3/L4 artifacts until those are reconciled and versioned.
+* **Traceability:** each symbol appearing in the spec must refer to an L0 artifact or be defined in the Notation Table.
 
 ---
 
-### 4. Objective Function
+## Outputs to downstream layers
 
-Define optimization target:
-
-```math
-\theta^* = \arg\min_\theta \mathbb{E}_{(x,y)\sim D}[\ell(f_\theta(x), y)]
-```
-
-If robustness:
-
-```math
-\sup_{\delta \in \Delta} \ell(f_\theta(x+\delta), y)
-```
+* **To L2:** the Notation Table + symbolic definitions that L2 maps into rhetorical claims. (L2 may quote a symbol's one-line definition from the Notation Table, but may not redefine it.)
+* **To L3:** explicit input/output signatures, tensor shapes, required auxiliary outputs, and evaluation function signatures — all in symbolic form for direct translation into engineering contract fields.
 
 ---
 
-### 5. Method Formalization
+## Compliance checklist (short)
 
-Define every transformation as function composition:
+Before marking `formal_spec_vX.qmd` ready:
 
-```math
-z = g_\phi(x)
-\hat{y} = h_\psi(z)
-```
+* [ ] Notation Table present and complete (one-line definitions).
+* [ ] No prose outside Notation Table.
+* [ ] All variables used later are declared in Notation Table or symbol sets.
+* [ ] Upstream L0 references listed in metadata.
+* [ ] Version metadata and changelog included.
 
-Define dependencies explicitly:
 
-```math
-f_\theta = h_\psi \circ g_\phi
-```
-
-No intuitive explanation.
-
----
-
-### 6. Required Outputs for Engineering Layer
-
-Explicit mapping definitions:
-
-```math
-f_\theta : \mathbb{R}^{d} \to \mathbb{R}^{k}
-```
-
-Output tensor shape formalization:
-
-```math
-f_\theta(x) \in \mathbb{R}^{B \times K}
-```
-
-If logging requires additional outputs:
-
-```math
-\mathcal{M}(x; \theta) \to ( \hat{y}, s, a )
-```
-
-Everything must be formalized.
-
----
-
-## Artifact Structure
-
-The `formal_spec_vX.qmd` must contain:
-
-1. Symbol Table
-2. Domain Definitions
-3. Dataset Formalization
-4. Assumptions
-5. Objective Function
-6. Method Functional Decomposition
-7. Output Interface Definition
-8. Evaluation Functional Mapping
-
-Nothing else.
-
-No prose.
-
----
-
-## Mutation Policy
-
-* During early formalization: iterative refinement allowed.
-* After freeze:
-
-  * Any change requires version increment.
-  * Downstream layers become invalidated.
-* No silent modifications.
-
----
-
-## Output to L2
-
-L2 receives:
-
-* Formal objective
-* Functional structure
-* Variable definitions
-
-L2 translates these into narrative and motivation.
-
-L2 cannot redefine any symbol.
-
----
-
-## Output to L3
-
-L3 receives:
-
-* Input/output mappings
-* Required transformations
-* Explicit tensor shapes
-* Logging outputs
-* Evaluation function signatures
-
-L3 converts them into engineering contract.
-
----
-
-# Structural Clarification
-
-Correct dependency after L0 revision:
-
-```id="depgraph"
-L0 (External Contracts + Literature Records)
-      ↓
-L1 (Pure Formal Specification in qmd)
-      ↓
-      ├── L2 (Rhetorical Construction)
-      └── L3 (Engineering Contract Design)
-```
-
-L1 is the mathematical kernel.
-
-It must remain:
-
-* Minimal
-* Formal
-* Symbolic
-* Frozen once stable
 
 
 
