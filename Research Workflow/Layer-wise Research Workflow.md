@@ -23,11 +23,11 @@ The goal is to prevent uncontrolled drift while preserving flexibility.
 # Global Structural Overview
 
 ```
-L0  Knowledge & External System Layer
-L1  Formal Problem & Method Specification Layer
-L2  Claim & Rhetorical Layer
-L3  Engineering Contract Layer
-L4  Experimental Evidence Layer
+L0  Knowledge Archiving & External Contract Extraction Layer
+L1  Formal Problem & Method Specification Layer (QMD, Symbol-Only)
+L2  Claim Construction & Rhetorical Translation Layer
+L3  Engineering Contract Design Layer
+L4  Experimental Execution & Evidence Layer
 ```
 
 Dependency graph:
@@ -44,135 +44,438 @@ Rules:
 * Upward changes require explicit rollback.
 * Each layer produces versioned artifacts.
 
----
 
-# L0 — Knowledge & External System Layer
+
+# L0 — Knowledge Archiving & External Contract Extraction Layer
 
 ## Purpose
 
-Construct the external knowledge model and reusable system components.
+L0 is a structured extraction and archival layer.
 
-This layer answers:
+It does **not** perform design abstraction or constraint reasoning.
 
-* What has been done?
-* What constraints exist?
-* What contracts do prior systems assume?
+It performs:
+
+* Systematic literature note organization
+* Explicit contract extraction from prior open-source implementations
+* Clean separation between “what exists” and “what we design”
+
+This layer answers only:
+
+* What did prior work implement?
+* How were their systems structured?
+* What were their explicit and implicit contracts?
+
+---
 
 ## Inputs
 
-* Papers
-* Open-source repositories
-* Benchmarks
-* Datasets
+* Research papers
+* Corresponding open-source repositories
+* Public benchmarks
+* Public datasets
+
+---
 
 ## Operations
 
-1. Literature reading
-2. Structured note-taking (Zotero or equivalent)
-3. Claim extraction
-4. Reverse-engineering prior contracts:
+### 1. Literature Structuring (Zotero-based)
 
-   * Data schema
-   * Input/output formats
-   * Model assumptions
-   * Evaluation pipeline
+For each paper:
+
+* Summary of problem definition
+* Method outline
+* Explicit claims
+* Evaluation protocol
+* Reported limitations
+* Experimental configuration notes
+
+No abstraction. No synthesis. Just structured recording.
+
+---
+
+### 2. Contract Extraction from Open-Source Code
+
+For each repository:
+
+Extract and document:
+
+#### (a) Data Contract
+
+* Input format
+* Preprocessing steps
+* Label schema
+* Data storage structure
+* Data loading pipeline
+
+#### (b) Model Interface Contract
+
+* Expected input tensor shape
+* Output tensor structure
+* Required hyperparameters
+* Implicit assumptions (e.g., normalized input, fixed sequence length)
+
+#### (c) Training Contract
+
+* Loss functions
+* Optimization strategy
+* Batch structure
+* Logging structure
+
+#### (d) Evaluation Contract
+
+* Metrics computed
+* Required prediction format
+* Evaluation script interface
+* Reporting structure
+
+Important:
+Do not interpret.
+Do not critique.
+Do not redesign.
+
+Just record.
+
+---
 
 ## Artifacts
 
-1. Literature Notes Database
+### 1. Zotero Knowledge Base
 
-   * Structured summaries
-   * Extracted claims
-   * Limitations
-   * Assumptions
+Each entry contains:
 
-2. Claim Repository
+* Structured summary
+* Extracted claims
+* Experimental setup notes
+* Links to repository
 
-   * Atomic claims
-   * Linked to citations
-   * Categorized (theoretical, empirical, engineering)
+---
 
-3. External Engineering Contracts
+### 2. External Contract Documents
 
-   * Data format definitions
-   * Module boundaries
-   * Evaluation protocols
+For each prior system:
+
+```
+external_contract_<paper_name>.md
+```
+
+Contents:
+
+* Data Contract
+* Model Interface Contract
+* Training Contract
+* Evaluation Contract
+* Noted implicit assumptions
+
+---
+
+## What L0 Explicitly Does NOT Produce
+
+* No design space
+* No constraint synthesis
+* No feasibility reasoning
+* No solution proposal
+* No problem redefinition
+
+Those belong to L1.
+
+---
 
 ## Output to L1
 
-* Feasible design space
-* Known constraints
-* Interface requirements
-* Competitive baselines
+Only two things:
+
+1. A collection of prior external contracts
+2. A structured knowledge base of related work
+
+L1 decides what to use.
+
+很好，这里确实需要一次**结构性修正**，否则 L1 会重新吸收 L0 的“设计空间”概念，同时又混入叙事性表达。
+
+我们重写 L1，使其与修正后的 L0 严格对齐，并且明确：
+
+* 输入来自 **external contracts + literature records**
+* 产出是 **纯公式化规范**
+* 使用 **qmd（Quarto）**
+* 不允许自然语言解释
+* 不做动机陈述
+
+下面是修正版。
 
 ---
 
 # L1 — Formal Problem & Method Specification Layer
 
-This is the normative source of truth.
+## Position in the System
 
-## Purpose
+L1 is the **first constructive layer**.
 
-Formally define the research problem and method independent of rhetoric and implementation.
+L0 only records external systems.
+L1 defines the new system.
 
-## Inputs
+L1 is the **normative source of truth** for:
 
-* L0 design space
-* Extracted constraints
+* Problem definition
+* Mathematical structure
+* Variable space
+* Functional mapping
+
+It is not rhetorical.
+It is not engineering-level.
+It is not explanatory.
+
+It is purely formal.
+
+---
+
+## Inputs (Strictly Defined)
+
+From L0:
+
+1. External contract documents
+
+   * Data schemas
+   * Input/output structures
+   * Model interfaces
+   * Evaluation interfaces
+
+2. Structured literature records
+
+   * Formal problem definitions used in prior work
+   * Mathematical formulations
+   * Reported objectives
+
+No “design space”.
+No “constraint synthesis”.
+No interpretive abstraction.
+
+L1 reads external structures and defines a new formal system.
+
+---
+
+## Implementation Medium
+
+L1 must be written in:
+
+```id="qmdformal"
+formal_spec_vX.qmd
+```
+
+Requirements:
+
+* All content must be in mathematical notation.
+* No explanatory paragraphs.
+* No rhetorical sentences.
+* No motivation statements.
+* No narrative transitions.
+* Every statement must be expressible as:
+
+  * Definition
+  * Assumption
+  * Function
+  * Mapping
+  * Constraint
+  * Objective
+  * Theorem (optional)
+
+If something cannot be written symbolically, it does not belong in L1.
+
+---
 
 ## Operations
 
-1. Formal problem definition
+### 1. Symbol Table Definition
 
-   * Symbolic representation
-   * Input space
-   * Output space
-   * Constraints
+Define all primitives:
 
-2. Assumption specification
+* Sets
+* Spaces
+* Indices
+* Random variables
+* Operators
 
-3. Objective function definition
+Example structure:
 
-4. Method formalization
+```math
+\mathcal{X} \subseteq \mathbb{R}^d
+\mathcal{Y} = \{1, \dots, K\}
+D = \{(x_i, y_i)\}_{i=1}^n
+```
 
-   * Mathematical structure
-   * Functional dependencies
+---
 
-5. Theoretical property documentation (if applicable)
+### 2. Problem Definition
 
-## Artifact
+Formalize:
 
-Formal Specification Document (non-LaTeX paper draft)
+```math
+\text{Given } D \sim \mathcal{P}_{XY}
+```
 
-Contents:
+Define:
 
-* Notation table
-* Problem statement
-* Assumptions
-* Objective
-* Method equations
-* Expected invariants
+* Input space
+* Output space
+* Learning objective domain
 
-This document is NOT rhetorical.
-It is a design specification.
+---
+
+### 3. Assumptions
+
+Explicit assumptions only:
+
+```math
+\mathcal{P}_{train} \neq \mathcal{P}_{test}
+```
+
+```math
+f_\theta : \mathcal{X} \to \mathcal{Y}
+```
+
+No textual explanation.
+
+---
+
+### 4. Objective Function
+
+Define optimization target:
+
+```math
+\theta^* = \arg\min_\theta \mathbb{E}_{(x,y)\sim D}[\ell(f_\theta(x), y)]
+```
+
+If robustness:
+
+```math
+\sup_{\delta \in \Delta} \ell(f_\theta(x+\delta), y)
+```
+
+---
+
+### 5. Method Formalization
+
+Define every transformation as function composition:
+
+```math
+z = g_\phi(x)
+\hat{y} = h_\psi(z)
+```
+
+Define dependencies explicitly:
+
+```math
+f_\theta = h_\psi \circ g_\phi
+```
+
+No intuitive explanation.
+
+---
+
+### 6. Required Outputs for Engineering Layer
+
+Explicit mapping definitions:
+
+```math
+f_\theta : \mathbb{R}^{d} \to \mathbb{R}^{k}
+```
+
+Output tensor shape formalization:
+
+```math
+f_\theta(x) \in \mathbb{R}^{B \times K}
+```
+
+If logging requires additional outputs:
+
+```math
+\mathcal{M}(x; \theta) \to ( \hat{y}, s, a )
+```
+
+Everything must be formalized.
+
+---
+
+## Artifact Structure
+
+The `formal_spec_vX.qmd` must contain:
+
+1. Symbol Table
+2. Domain Definitions
+3. Dataset Formalization
+4. Assumptions
+5. Objective Function
+6. Method Functional Decomposition
+7. Output Interface Definition
+8. Evaluation Functional Mapping
+
+Nothing else.
+
+No prose.
+
+---
 
 ## Mutation Policy
 
-* May evolve during conceptual refinement.
-* After freeze, modifications require explicit version bump.
+* During early formalization: iterative refinement allowed.
+* After freeze:
+
+  * Any change requires version increment.
+  * Downstream layers become invalidated.
+* No silent modifications.
+
+---
 
 ## Output to L2
 
-* Structured logic
-* Mathematical ground truth
+L2 receives:
+
+* Formal objective
+* Functional structure
+* Variable definitions
+
+L2 translates these into narrative and motivation.
+
+L2 cannot redefine any symbol.
+
+---
 
 ## Output to L3
 
-* Input/output formal definitions
+L3 receives:
+
+* Input/output mappings
 * Required transformations
-* Functional mapping
+* Explicit tensor shapes
+* Logging outputs
+* Evaluation function signatures
+
+L3 converts them into engineering contract.
 
 ---
+
+# Structural Clarification
+
+Correct dependency after L0 revision:
+
+```id="depgraph"
+L0 (External Contracts + Literature Records)
+      ↓
+L1 (Pure Formal Specification in qmd)
+      ↓
+      ├── L2 (Rhetorical Construction)
+      └── L3 (Engineering Contract Design)
+```
+
+L1 is the mathematical kernel.
+
+It must remain:
+
+* Minimal
+* Formal
+* Symbolic
+* Frozen once stable
+
+
 
 # L2 — Claim & Rhetorical Layer
 
