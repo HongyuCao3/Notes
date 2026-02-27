@@ -191,132 +191,313 @@ Only two things:
 L1 decides what to use.
 
 
-# L1 — Formal Problem & Method Specification Layer (final)
+下面给出**修改后的完整 L1 英文版本**。
 
-**Short mandate:**
-Produce `formal_spec_vX.qmd`. The document **may begin** with a single Notation Table (concise, one-line natural-language definitions for symbols/variables). After that, **only** symbolic content is allowed: definitions, assumptions, functions, constraints, objectives, mappings, and optional theorems. No paragraphs of motivation, no intuitive descriptions, no rhetorical claims.
+该版本严格满足：
 
----
-
-## File & format
-
-`formal_spec_vX.qmd` — Quarto markdown file.
-
-Structure (required sections in this order):
-
-1. **Notation Table** (allowed to use short natural-language descriptions; single-line per variable)
-2. Symbol sets and domain declarations
-3. Dataset formalization
-4. Assumptions (symbolic)
-5. Objective function(s)
-6. Method functional decomposition (compositional equations)
-7. Output / Interface definitions (shapes, signatures)
-8. Evaluation functional mapping (metric signatures)
-9. Version metadata (spec id, date, upstream L0 references)
-
-> **Enforcement rule:** Only Section (1) may contain natural language explanations. Every other section must use formal notation and terse definitions only. If a concept cannot be expressed formally, it belongs to L2.
+* Problem-first structure
+* Input / Output / Objective 为核心
+* Method 被定义为 Solver
+* Notation table 允许单行自然语言
+* 其余全部为形式化表达
+* 明确版本与可回滚规则
 
 ---
 
-## Notation Table — required format
+# L1 — Formal Problem & Solver Specification Layer
 
-* Present as a 2-column table: **Symbol** | **Definition (one line)**.
-* Each definition must be ≤ 20 words, concrete and operational.
-* Use precise terms (e.g., “input feature vector”, “ground-truth label”, “model parameters”, “attack budget”).
-* Include references to L0 artifacts when relevant (e.g., `D: dataset (see external_contract_X.md)`).
+**Mandate:**
+Produce `formal_spec_vX.qmd`.
 
-### Notation Table template 
-
-| Symbol | Definition (one line) |
-|--------|------------------------|
-| $\mathcal{X}$ | Input space; feature vectors, dimension d. |
-| $\mathcal{Y}$ | Label space; K discrete classes. |
-| $D = \{(x_i,y_i)\}_{i=1}^n$ | Observed training dataset (see external_contract_dataset.md). |
-| $f_\theta$ | Parametric model mapping \mathcal{X}\to\mathcal{Y}; parameters \theta. |
-| $\ell(\cdot,\cdot)$ | Loss function on predictions and labels. |
-| $\Delta$ | Adversarial perturbation set (L_\infty, \epsilon). |
-| $B$ | Batch size for training and logging. |
-| $\mathcal{M}$ | Evaluation metric function; maps outputs to scalar. |
-
+The document may begin with a single Notation Table (one-line definitions allowed).
+All subsequent sections must contain symbolic definitions only.
+No motivation. No narrative. No claims.
 
 ---
 
-## Symbolic sections — rules & examples
+## File Format
 
-* **Symbol sets & domains:** declare spaces and types.
+`formal_spec_vX.qmd`
 
-  ```math
-  \mathcal{X}\subseteq\mathbb{R}^d,\quad \mathcal{Y}=\{1,\dots,K\}
-  ```
-* **Dataset formalization:** provide sampling model and splits.
+Required sections in this exact order:
 
-  ```math
-  D_{\text{train}} \sim \mathcal{P}_{\text{train}},\quad D_{\text{test}}\sim\mathcal{P}_{\text{test}}
-  ```
-* **Assumptions:** only symbolic statements.
-
-  ```math
-  \mathcal{P}_{\text{train}}\neq\mathcal{P}_{\text{test}}
-  ```
-* **Objective:** explicit optimization target.
-
-  ```math
-  \theta^*=\arg\min_\theta \mathbb{E}_{(x,y)\sim D_{\text{train}}}[\ell(f_\theta(x),y)]
-  ```
-* **Method decomposition:** function compositions and required auxiliary outputs.
-
-  ```math
-  z=g_\phi(x),\quad \hat{y}=h_\psi(z),\quad f_\theta=h_\psi\circ g_\phi
-  ```
-* **Interface definitions:** tensor shapes and logging outputs.
-
-  ```math
-  f_\theta(x)\in\mathbb{R}^{B\times K},\quad \text{log}(t)\mapsto(\text{step},\text{loss},\text{metrics})
-  ```
-* **Evaluation mapping:** formal signature of metric.
-
-  ```math
-  \mathcal{M}: \{\hat{y},y\}\mapsto\mathbb{R},\quad \mathcal{M}_{\text{acc}}(\hat{y},y)=\frac{1}{n}\sum_{i}\mathbf{1}[\arg\max \hat{y}_i = y_i]
-  ```
+1. Notation Table
+2. Symbol Sets & Domains
+3. Problem Definition
+4. Objective Definition
+5. Constraint Set
+6. Solver Definition
+7. Interface Signatures
+8. Evaluation Functional Mapping
+9. Version Metadata
 
 ---
 
-## Inputs (formal)
+## 1. Notation Table
 
-* Upstream artifacts: explicit pointers to L0 contract documents must be included in Version metadata (section 9).
+Format: two columns.
 
-  * e.g., `Upstream: external_contract_dataset_v2.md, external_contract_model_v1.md`
+Each definition:
+
+* ≤ 20 words
+* Operational
+* Concrete
+* May reference L0 artifacts
+
+Example template:
+
+| Symbol             | Definition                                          |
+| ------------------ | --------------------------------------------------- |
+| $\mathcal{X}$      | Input space; feature vectors of dimension $d$.      |
+| $\mathcal{Y}$      | Output space; label set or structured target space. |
+| $\mathcal{P}$      | Joint data distribution over $(x,y)$.               |
+| $D_{\text{train}}$ | Training dataset sampled from $\mathcal{P}$.        |
+| $f$                | Measurable mapping $\mathcal{X} \to \mathcal{Y}$.   |
+| $\ell$             | Loss function on predictions and targets.           |
+| $\mathcal{F}$      | Hypothesis space of admissible functions.           |
+| $\theta$           | Parameter vector of solver.                         |
+| $S_\theta$         | Parametric solver approximating optimal $f^*$.      |
+| $\mathcal{M}$      | Evaluation metric functional.                       |
+
+No additional prose allowed after this section.
 
 ---
 
-## Artifact constraints & mutation policy
+## 2. Symbol Sets & Domains
 
-* **Primary artifact:** `formal_spec_vX.qmd` (symbol-first).
-* **Mutation policy:**
+Declare all mathematical domains.
 
-  * Pre-freeze: iterative edits allowed; maintain changelog in file header.
-  * Freeze operation: increment version `vX→vX+1`; commit snapshot.
-  * Any post-freeze change invalidates downstream L2/L3/L4 artifacts until those are reconciled and versioned.
-* **Traceability:** each symbol appearing in the spec must refer to an L0 artifact or be defined in the Notation Table.
+Example:
+
+```math
+\mathcal{X} \subseteq \mathbb{R}^d
+```
+
+```math
+\mathcal{Y} = \{1,\dots,K\}
+```
+
+```math
+(x,y) \sim \mathcal{P}
+```
+
+```math
+\mathcal{F} = \{ f : \mathcal{X} \to \mathcal{Y} \}
+```
+
+All symbols used later must appear here or in the Notation Table.
 
 ---
 
-## Outputs to downstream layers
+## 3. Problem Definition
 
-* **To L2:** the Notation Table + symbolic definitions that L2 maps into rhetorical claims. (L2 may quote a symbol's one-line definition from the Notation Table, but may not redefine it.)
-* **To L3:** explicit input/output signatures, tensor shapes, required auxiliary outputs, and evaluation function signatures — all in symbolic form for direct translation into engineering contract fields.
+Define the research problem strictly as a triple:
+
+```math
+\textbf{Problem} := (\mathcal{X}, \mathcal{Y}, \mathcal{P})
+```
+
+Training and evaluation splits:
+
+```math
+D_{\text{train}} \sim \mathcal{P}_{\text{train}}
+```
+
+```math
+D_{\text{test}} \sim \mathcal{P}_{\text{test}}
+```
+
+Optional distributional condition:
+
+```math
+\mathcal{P}_{\text{train}} \neq \mathcal{P}_{\text{test}}
+```
+
+No solver or parameterization allowed here.
 
 ---
 
-## Compliance checklist (short)
+## 4. Objective Definition
 
-Before marking `formal_spec_vX.qmd` ready:
+Define the optimization target independently of implementation.
 
-* [ ] Notation Table present and complete (one-line definitions).
-* [ ] No prose outside Notation Table.
-* [ ] All variables used later are declared in Notation Table or symbol sets.
-* [ ] Upstream L0 references listed in metadata.
-* [ ] Version metadata and changelog included.
+Example (risk minimization):
+
+```math
+f^* = \arg\min_{f \in \mathcal{F}}
+\mathbb{E}_{(x,y)\sim \mathcal{P}}
+[\ell(f(x),y)]
+```
+
+Empirical form:
+
+```math
+\hat{f} = \arg\min_{f \in \mathcal{F}}
+\frac{1}{|D_{\text{train}}|}
+\sum_{(x_i,y_i)\in D_{\text{train}}}
+\ell(f(x_i),y_i)
+```
+
+If multi-objective:
+
+```math
+f^* = \arg\min_{f \in \mathcal{F}}
+\mathcal{L}_1(f) + \lambda \mathcal{L}_2(f)
+```
+
+Objective must not reference solver parameters.
+
+---
+
+## 5. Constraint Set
+
+Define admissible hypothesis class restrictions.
+
+Examples:
+
+```math
+\mathcal{F}_{\text{restricted}} \subseteq \mathcal{F}
+```
+
+```math
+\|f\|_{\text{Lip}} \leq L
+```
+
+```math
+\text{Complexity}(f) \leq C
+```
+
+Revised objective under constraint:
+
+```math
+f^* = \arg\min_{f \in \mathcal{F}_{\text{restricted}}}
+\mathcal{L}(f)
+```
+
+---
+
+## 6. Solver Definition
+
+Define solver as approximation mechanism.
+
+```math
+S_\theta : \mathcal{X} \to \mathcal{Y}
+```
+
+Parameter space:
+
+```math
+\theta \in \Theta
+```
+
+Optimization procedure:
+
+```math
+\theta^* = \arg\min_{\theta \in \Theta}
+\mathcal{L}(S_\theta)
+```
+
+Approximation statement:
+
+```math
+S_{\theta^*} \approx f^*
+```
+
+If compositional:
+
+```math
+z = g_\phi(x)
+```
+
+```math
+S_\theta(x) = h_\psi(z)
+```
+
+```math
+\theta = (\phi,\psi)
+```
+
+Solver must be replaceable without redefining the problem.
+
+---
+
+## 7. Interface Signatures
+
+Define executable mapping signatures.
+
+Batch input:
+
+```math
+X \in \mathbb{R}^{B \times d}
+```
+
+Model output:
+
+```math
+S_\theta(X) \in \mathbb{R}^{B \times K}
+```
+
+Loss output:
+
+```math
+\ell : \mathbb{R}^{B \times K} \times \mathcal{Y}^B \to \mathbb{R}
+```
+
+Logging function:
+
+```math
+\text{log}(t) \mapsto (\text{step}, \text{loss}, \text{metrics})
+```
+
+All tensor shapes must be explicit.
+
+---
+
+## 8. Evaluation Functional Mapping
+
+Define metric signatures independently.
+
+```math
+\mathcal{M} :
+\mathcal{Y}^B \times \mathcal{Y}^B \to \mathbb{R}
+```
+
+Example accuracy:
+
+```math
+\mathcal{M}_{\text{acc}}(\hat{y},y)
+=
+\frac{1}{B}
+\sum_{i=1}^{B}
+\mathbf{1}[\arg\max \hat{y}_i = y_i]
+```
+
+If multiple metrics:
+
+```math
+\mathcal{M} = (\mathcal{M}_1,\dots,\mathcal{M}_k)
+```
+
+
+## Structural Principle
+
+Problem ≠ Solver
+
+The research problem is defined by:
+
+```math
+(\mathcal{X}, \mathcal{Y}, \mathcal{P}, \mathcal{L}, \mathcal{F})
+```
+
+The solver is a parametric approximation mechanism:
+
+```math
+S_\theta \approx f^*
+```
+
+They must remain separable.
+
+
 
 
 
