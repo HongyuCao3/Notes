@@ -22,13 +22,13 @@ If this decision is postponed, writing will require re-reading.
 
 ---
 
-# 1. Top-Level Classification (Role-Based Layers)
+## 1. Top-Level Classification (Role-Based Layers)
 
 Every paper must be assigned to exactly one primary layer.
 
 ---
 
-## L0 — Direct Baselines
+### L0 — Direct Baselines
 
 **Definition:**
 Papers that can be directly compared in the main experimental table.
@@ -54,7 +54,7 @@ If yes → L0.
 
 ---
 
-## L1 — Same Task, Different Paradigm
+### L1 — Same Task, Different Paradigm
 
 **Definition:**
 Papers solving the same high-level problem but using fundamentally different approaches.
@@ -81,7 +81,7 @@ Defines the competitive landscape.
 
 ---
 
-## L2 — Methodologically Related
+### L2 — Methodologically Related
 
 **Definition:**
 Papers sharing technical components but solving different tasks.
@@ -106,7 +106,7 @@ Papers sharing technical components but solving different tasks.
 
 ---
 
-## L2.5 — Mechanism-Level or Theoretical Overlap
+### L2.5 — Mechanism-Level or Theoretical Overlap
 
 **Definition:**
 Papers that support or threaten your underlying mechanism.
@@ -136,7 +136,7 @@ These papers often determine reviewer perception of rigor.
 
 ---
 
-## L3 — Background & Foundational Work
+### L3 — Background & Foundational Work
 
 **Definition:**
 Foundational papers defining tools or concepts used.
@@ -155,7 +155,7 @@ Foundational papers defining tools or concepts used.
 
 ---
 
-## L4 — Peripheral / Inspirational
+### L4 — Peripheral / Inspirational
 
 **Definition:**
 Inspiration or loosely related ideas that do not structurally affect your claim.
@@ -167,13 +167,13 @@ Inspiration or loosely related ideas that do not structurally affect your claim.
 
 ---
 
-# 2. Decision Flow (Operational Classification Algorithm)
+## 2. Decision Flow (Operational Classification Algorithm)
 
 When reading a paper, follow this sequence:
 
 ---
 
-### Step 1
+#### Step 1
 
 Does it optimize the same downstream objective?
 
@@ -182,7 +182,7 @@ Does it optimize the same downstream objective?
 
 ---
 
-### Step 2
+#### Step 2
 
 Can it be evaluated on the same dataset + metric?
 
@@ -191,7 +191,7 @@ Can it be evaluated on the same dataset + metric?
 
 ---
 
-### Step 3
+#### Step 3
 
 Is the high-level goal identical (e.g., robustness, generalization)?
 
@@ -200,7 +200,7 @@ Is the high-level goal identical (e.g., robustness, generalization)?
 
 ---
 
-### Step 4
+#### Step 4
 
 Does it share core technical modules?
 
@@ -209,7 +209,7 @@ Does it share core technical modules?
 
 ---
 
-### Step 5
+#### Step 5
 
 Does it analyze or justify the mechanism behind our claim?
 
@@ -218,7 +218,7 @@ Does it analyze or justify the mechanism behind our claim?
 
 ---
 
-# 3. Example: Robust Feature Generation via Latent-Guided Diffusion
+## 3. Example: Robust Feature Generation via Latent-Guided Diffusion
 
 Suppose the project studies:
 
@@ -229,7 +229,7 @@ Then classification would look like:
 
 ---
 
-## L0
+### L0
 
 * Diffusion-based augmentation improving classification robustness
 * Generative feature enhancement methods
@@ -237,7 +237,7 @@ Then classification would look like:
 
 ---
 
-## L1
+### L1
 
 * Domain generalization
 * Test-time adaptation
@@ -247,7 +247,7 @@ Then classification would look like:
 
 ---
 
-## L2
+### L2
 
 * Latent diffusion models
 * Classifier-guided diffusion
@@ -255,7 +255,7 @@ Then classification would look like:
 
 ---
 
-## L2.5
+### L2.5
 
 * Stochastic smoothing theory
 * Perturbation improves generalization
@@ -264,7 +264,7 @@ Then classification would look like:
 
 ---
 
-## L3
+### L3
 
 * Original diffusion model papers
 * Score-based generative modeling
@@ -272,7 +272,7 @@ Then classification would look like:
 
 ---
 
-# 4. Mandatory Note Template for Each Paper
+## 4. Mandatory Note Template for Each Paper
 
 Each Zotero note (or literature note) should include:
 
@@ -304,7 +304,7 @@ This prevents re-analysis during writing.
 
 ---
 
-# 5. Mapping to Paper Structure
+## 5. Mapping to Paper Structure
 
 | Paper Section              | Literature Layers |
 | -------------------------- | ----------------- |
@@ -319,7 +319,7 @@ This prevents re-analysis during writing.
 
 ---
 
-# 6. Final Guiding Question
+## 6. Final Guiding Question
 
 For every paper you read, ask:
 

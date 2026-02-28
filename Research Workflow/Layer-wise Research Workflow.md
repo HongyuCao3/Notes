@@ -190,20 +190,6 @@ Only two things:
 
 L1 decides what to use.
 
-
-下面给出**修改后的完整 L1 英文版本**。
-
-该版本严格满足：
-
-* Problem-first structure
-* Input / Output / Objective 为核心
-* Method 被定义为 Solver
-* Notation table 允许单行自然语言
-* 其余全部为形式化表达
-* 明确版本与可回滚规则
-
----
-
 # L1 — Formal Problem & Solver Specification Layer
 
 **Mandate:**
