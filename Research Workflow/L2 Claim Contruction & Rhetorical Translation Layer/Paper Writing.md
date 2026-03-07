@@ -135,8 +135,7 @@ The emphasis is on **step-by-step procedural clarity**, **explicit linkage to ch
 
 Let $c_k$ denote a prototype obtained by structural clustering.
 We define its reliability score as:
-$$r_k = \phi\big(\mathbb{E}_{\mathbf{x} \in c_k}[\ell(\mathbf{x})],\;
-              \mathbb{E}_{\mathbf{x} \in c_k}[\Delta(\mathbf{x})]\big),$$
+$$r_k = \phi\big(\mathbb{E}_{\mathbf{x} \in c_k}[\ell(\mathbf{x})],\;\mathbb{E}_{\mathbf{x} \in c_k}[\Delta(\mathbf{x})]\big),$$
 where $\phi(\cdot)$ is a prototype-level aggregation function introduced in this work.
 
 * Clearly state **why this formulation differs from and improves upon prior work**.
