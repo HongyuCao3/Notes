@@ -6,7 +6,9 @@
   → This may lead to **overfitting** and a **discontinuous latent space** that cannot generate meaningful new samples.
 
 - The Variational Autoencoder (VAE) introduces **probabilistic encoding**, where each data point $x$ is mapped to a **distribution** over latent variables $z$, typically modeled as a Gaussian:  
-  $z \sim q_{\phi}(z|x) = \mathcal{N}(z; \mu_{\phi}(x), \Sigma_{\phi}(x))$
+  $$
+  z \sim q_{\phi}(z|x) = \mathcal{N}(z; \mu_{\phi}(x), \Sigma_{\phi}(x))
+  $$
 
 - This stochastic mapping encourages a **smooth, continuous, and generative** latent space.
 
@@ -19,7 +21,9 @@
 We assume a **generative model** parameterized by $\theta$:
 
 - **Prior** over latent variables:  
-  $p_{\theta}(z) = \mathcal{N}(0, I)$
+  $$
+  p_{\theta}(z) = \mathcal{N}(0, I)
+  $$
 
 - **Decoder (Generative model)**:  
   $p_{\theta}(x|z)$
@@ -46,11 +50,16 @@ Parameters:
 ## 3. Objective: Variational Lower Bound (ELBO)
 
 The log-likelihood of the data is:
-$\ln p_{\theta}(x) = \ln \int p_{\theta}(x|z)p_{\theta}(z)\,dz$
+$$
+\ln p_{\theta}(x) = \ln \int p_{\theta}(x|z)p_{\theta}(z)\,dz
+$$
 which is **intractable** due to the integral.
 
 We introduce the **Evidence Lower BOund (ELBO)**:
-$\mathcal{L}(\theta, \phi; x) = \mathbb{E}_{z \sim q_{\phi}(z|x)}[\ln p_{\theta}(x|z)] - D_{KL}(q_{\phi}(z|x) \parallel p_{\theta}(z))$
+
+$$
+\mathcal{L}(\theta, \phi; x) = \mathbb{E}_{z \sim q_{\phi}(z|x)}[\ln p_{\theta}(x|z)] - D_{KL}(q_{\phi}(z|x) \parallel p_{\theta}(z))
+$$
 
 
 Maximizing the ELBO jointly w.r.t. $\theta$ and $\phi$ achieves two goals:
@@ -58,7 +67,10 @@ Maximizing the ELBO jointly w.r.t. $\theta$ and $\phi$ achieves two goals:
 2. **Regularization:** The second term pushes $q_{\phi}(z|x)$ towards the prior $p_{\theta}(z)$, preventing overfitting.
 
 Thus,
-$\theta^*, \phi^* = \arg\max_{\theta, \phi} \mathcal{L}(\theta, \phi; x)$
+
+$$
+\theta^*, \phi^* = \arg\max_{\theta, \phi} \mathcal{L}(\theta, \phi; x)
+$$
 
 ---
 
@@ -66,7 +78,9 @@ $\theta^*, \phi^* = \arg\max_{\theta, \phi} \mathcal{L}(\theta, \phi; x)$
 
 To enable gradient-based optimization, we rewrite sampling as a deterministic function:
 
-$z = \mu_{\phi}(x) + \Sigma_{\phi}(x)^{1/2} \odot \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)$
+$$
+z = \mu_{\phi}(x) + \Sigma_{\phi}(x)^{1/2} \odot \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
+$$
 
 This allows gradients to flow through $z$ during backpropagation.
 
@@ -81,8 +95,11 @@ This allows gradients to flow through $z$ during backpropagation.
    - Decoder reconstructs $\hat{x} = D_{\theta}(z)$
 
 2. **Compute loss:**
-   $\mathcal{L}(x; \theta, \phi) = 
-   \underbrace{-\mathbb{E}_{q_{\phi}(z|x)}[\ln p_{\theta}(x|z)]}_{\text{Reconstruction Loss}} + \underbrace{D_{KL}(q_{\phi}(z|x) \parallel p_{\theta}(z))}_{\text{Regularization Loss}}$
+   
+   $$
+   \mathcal{L}(x; \theta, \phi) = 
+   \underbrace{-\mathbb{E}_{q_{\phi}(z|x)}[\ln p_{\theta}(x|z)]}_{\text{Reconstruction Loss}} + \underbrace{D_{KL}(q_{\phi}(z|x) \parallel p_{\theta}(z))}_{\text{Regularization Loss}}
+   $$
 
 3. **Backpropagation** to update $\theta, \phi$.
 
@@ -91,13 +108,19 @@ This allows gradients to flow through $z$ during backpropagation.
 ## 6. Extensions and Variants
 
 - **Conditional VAE (CVAE):**  
-  Incorporates label or auxiliary variable $y$:  
-  $q_{\phi}(z|x, y), \quad p_{\theta}(x|z, y)$
+  Incorporates label or auxiliary variable $y$:
+
+  $$
+  q_{\phi}(z|x, y), \quad p_{\theta}(x|z, y)
+  $$
   → Enables **controlled generation** (e.g., generate digits conditioned on labels in MNIST).
 
 - **β-VAE:**  
   Adds a hyperparameter $\beta$ to control the tradeoff between reconstruction and disentanglement:  
-  $\mathcal{L}_{\beta} = \mathbb{E}_{q_{\phi}(z|x)}[\ln p_{\theta}(x|z)] - \beta D_{KL}(q_{\phi}(z|x) \parallel p_{\theta}(z))$
+
+  $$
+  \mathcal{L}_{\beta} = \mathbb{E}_{q_{\phi}(z|x)}[\ln p_{\theta}(x|z)] - \beta D_{KL}(q_{\phi}(z|x) \parallel p_{\theta}(z))
+  $$
 
 - **Hierarchical or Disentangled VAEs:**  
   Introduce structured latent spaces or factorized priors for interpretability.
