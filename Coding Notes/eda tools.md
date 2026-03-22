@@ -1,63 +1,50 @@
 # EDA Tools
 
-## missingno
-`missingno` is a Python library for **visualizing missing data** in datasets.  
-It helps detect **patterns, distribution, and correlations** of missing values during EDA.
+## missingno — Visualize Missing Data
 
-### Main Functions
+- `pip install missingno`
+- Quickly reveals **where** and **how** data is missing
 
- - Matrix Plot
-    ```python
-    msno.matrix(df)
-    ```
-
-    Shows missing values across rows and columns.
-
-    Brightness/opacity indicates data completeness.
-
- - Bar Plot
-    ```python
-    msno.bar(df)
-    ```
-
-    Displays non-missing count and missing ratio for each column.
-
-    Good for comparing feature completeness.
-
- - Heatmap
-    ```python
-    msno.heatmap(df)
-    ```
-
-    Correlation map of missing values between features.
-
-    Helps find variables that tend to be missing together.
-
- - Dendrogram
-    ```python
-    msno.dendrogram(df)
-    ```
-
-      Hierarchical clustering of missing-value correlations.
-
-      Useful for identifying variable groups with similar missing patterns.
-
-###  Example Usage
 ```python
 import missingno as msno
 import pandas as pd
 
-# Sample data
-df = pd.DataFrame({
-    "A": [1, 2, None, 4, 5],
-    "B": [1, None, None, 4, 5],
-    "C": [None, 2, 3, None, 5],
-})
-
-# Visualizations
-msno.matrix(df)
-msno.bar(df)
-msno.heatmap(df)
-msno.dendrogram(df)
+msno.matrix(df)      # row-level view — brightness = completeness
+msno.bar(df)         # per-column missing count and ratio
+msno.heatmap(df)     # correlation of missingness between columns
+msno.dendrogram(df)  # cluster columns by similar missing patterns
 ```
+
+- **heatmap** is most useful: if two features always go missing together, they likely share a source
+- **matrix** is best for spotting block-shaped missing patterns (e.g., missing from row 500 onward)
+
 ---
+
+## ydata-profiling — Automated EDA Report
+
+- `pip install ydata-profiling` (formerly pandas-profiling)
+- Generates a full HTML report from a DataFrame
+
+```python
+from ydata_profiling import ProfileReport
+
+profile = ProfileReport(df, title="EDA Report")
+profile.to_file("report.html")        # save to file
+profile.to_notebook_iframe()          # display in notebook
+```
+
+- Covers: distributions, correlations, missing values, duplicates, outliers
+- Best for **first look** at a new dataset — saves time vs manual inspection
+
+---
+
+## pandas built-ins (quick checks)
+
+```python
+df.info()              # dtypes, null counts, memory
+df.describe()          # stats for numeric columns
+df.isnull().sum()      # null count per column
+df.duplicated().sum()  # number of duplicate rows
+df.value_counts()      # frequency of each value (Series)
+df.corr()              # correlation matrix
+```

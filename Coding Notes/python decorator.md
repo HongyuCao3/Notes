@@ -1,221 +1,93 @@
+# Python Decorators
+
+## What Is a Decorator
+
+- A function that **wraps another function** to inject behavior without changing its implementation
+- `@decorator` is syntactic sugar for `func = decorator(func)`
+- Core use: separate **engineering concerns** (logging, timing, config) from **algorithm logic**
 
 ---
 
-# 🧠 **Python Decorators – Quick Recall Notes**
+## Standard Library Decorators
 
-## 1. What a Decorator *is*
-
-* A decorator is **a function that takes another function or class and returns a modified version of it**.
-* Purpose: **inject behavior without changing the original implementation**.
-* Formally, a decorator is a **higher-order function**:
-
-  ```python
-  decorated = decorator(original)
-  ```
-
-  Using `@decorator` is just syntactic sugar.
-
-### Intuition
-
-> Think of decorators as “wrappers” that add cross-cutting features (logging, timing, config injection) while keeping the core logic clean.
+| Decorator | Purpose |
+|-----------|---------|
+| `@functools.lru_cache(maxsize=N)` | Cache return values — great for slow repeated calls |
+| `@functools.cache` | Unlimited cache (Python 3.9+) |
+| `@property` | Compute attribute lazily on access |
+| `@cached_property` | Compute once, cache result on instance |
+| `@dataclasses.dataclass` | Auto-generate `__init__`, `__repr__`, `__eq__` |
+| `@staticmethod` / `@classmethod` | No `self` / alternative constructor |
+| `@functools.wraps(func)` | Preserve original function name/docstring in custom decorators |
 
 ---
 
-# 2. Core Use Cases in Research Engineering
+## PyTorch Decorators
 
-Decorators shine in three scenarios:
-
-### **(1) Runtime Behavior Injection**
-
-* Logging
-* Timing
-* Automatic exception handling
-* Autocasting / no-grad inference
-
-### **(2) Configuration and Experiment Control**
-
-* Hydra config injection
-* Automatic experiment directory creation
-* Seed fixing
-* Caching expensive computations
-
-### **(3) Modular Architecture**
-
-* Model registry
-* Dataset registry
-* Pipeline stage registration
+| Decorator | Purpose |
+|-----------|---------|
+| `@torch.no_grad()` | Disable gradient tracking for inference |
+| `@torch.inference_mode()` | Stricter + faster inference (prefer over `no_grad`) |
+| `@torch.cuda.amp.autocast()` | Auto mixed precision (FP16/BF16) for speed |
+| `@torch.compile` | JIT optimize model (PyTorch 2.x) |
 
 ---
 
-# 3. Essential Built-in & Standard-Library Decorators
+## Research / Experiment Decorators
 
-### ⭐ `@functools.lru_cache(maxsize=N)`
-
-Caches function outputs for performance.
-Ideal for: tokenizer loading, dataset metadata, slow preprocessing.
-
-### ⭐ `@functools.cache`
-
-Unlimited cache (Python 3.9+).
-
-### ⭐ `@property` / `@cached_property`
-
-Lazy computation of attributes.
-
-### ⭐ `@dataclasses.dataclass`
-
-Auto-generates `__init__`, `__repr__`, `__eq__`, etc.
-
-### ⭐ `@contextlib.contextmanager`
-
-Turns a function into a context manager; ideal for resource control.
-
-### ⭐ `@functools.wraps(func)`
-
-Must-use when writing custom decorators; preserves original function metadata.
+| Decorator | Purpose |
+|-----------|---------|
+| `@hydra.main(config_path, config_name)` | Entry point for config-driven experiments |
+| `@logger.catch` (loguru) | Auto-log exceptions with full traceback |
+| `@retry` (tenacity) | Retry on failure — good for API calls or downloads |
+| `@validate_call` (pydantic) | Runtime argument type checking |
 
 ---
 
-# 4. PyTorch Decorators You Will Use Constantly
+## Custom Research Decorators (Common Patterns)
 
-### ⭐ `@torch.no_grad()`
+```python
+import functools, time
 
-Disable gradient tracking → inference mode, saves memory + speed.
+# Timing
+def timeit(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        t0 = time.perf_counter()
+        result = func(*args, **kwargs)
+        print(f"{func.__name__} took {time.perf_counter() - t0:.2f}s")
+        return result
+    return wrapper
 
-### ⭐ `@torch.inference_mode()`
-
-More strict & faster inference; recommended over `no_grad()`.
-
-### ⭐ `@torch.cuda.amp.autocast()`
-
-Automatic mixed precision (AMP) for faster training/inference.
-
-### ⭐ `@torch.compile()`
-
-(For PyTorch 2.x) JIT-style optimization for model forward passes.
-
----
-
-# 5. Hydra / OmegaConf Decorators
-
-### ⭐ `@hydra.main(config_path, config_name)`
-
-Main entry point for config-driven experiments.
-Auto-creates `cfg: DictConfig`.
-
-### ⭐ `hydra.utils.instantiate(cfg)`
-
-(Not syntactically a decorator, but often used *like* one.)
-Auto-instantiates classes/functions from config dictionaries.
-
-Useful for:
-
-```yaml
-model:
-  _target_: src.models.MLP
-  input_dim: 128
+# Seed fixing
+def set_seed(seed):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            import random, numpy as np, torch
+            random.seed(seed); np.random.seed(seed); torch.manual_seed(seed)
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
 ```
 
 ---
 
-# 6. Loguru Decorator
-
-### ⭐ `@logger.catch`
-
-Automatic exception handling with full traceback + optional file logging.
-
-Ideal for:
-
-* training loop entry
-* evaluation entry
-* pipeline components
-
----
-
-# 7. Third-Party Highly Practical Decorators
-
-### ⭐ `@retry` (from **tenacity**)
-
-Auto-retry unstable operations (e.g., dataset download, API calls).
-
-### ⭐ `@ray.remote`
-
-Parallel task execution; important for large-scale hyperparameter search.
-
-### ⭐ `@numba.jit`
-
-JIT optimization for CPU/GPU numerical code.
-
-### ⭐ `@click.command`
-
-Create clean command-line interfaces.
-
-### ⭐ `@validate_arguments` (Pydantic)
-
-Runtime argument type checking.
-
----
-
-# 8. Research-Oriented Custom Decorators (Most Useful in Practice)
-
-These are typically handcrafted inside your research codebase:
-
-### 🔹 `@timeit`
-
-Logs execution time for profiling training steps or dataset preprocessing.
-
-### 🔹 `@set_seed`
-
-Automatically sets random seeds across `torch`, `numpy`, and `random`.
-
-### 🔹 `@track_experiment`
-
-Automatically creates a unique experiment directory and attaches Loguru handler.
-
-### 🔹 `@auto_save_config`
-
-Saves Hydra config to the experiment directory for reproducibility.
-
-### 🔹 `@register_model(name)`
-
-Creates a registry for plug-and-play model construction.
-
----
-
-# 9. A Typical Real-World Stack (Combining Multiple Decorators)
+## Real-World Stack (Research Training Entry)
 
 ```python
 @hydra.main(config_path="conf", config_name="train")
 @logger.catch
 @set_seed(42)
-@track_experiment
-@auto_save_config
 @timeit
 def train(cfg):
     ...
 ```
 
-This produces a clean training entry while automatically handling:
-
-* Hydra config loading
-* Logging
-* Seed fixing
-* Experiment directory management
-* Config saving
-* Timing/reporting
-
-**The training logic remains pure and uncluttered.**
+This single function handles: config loading, exception logging, reproducibility, and timing — keeping training logic clean.
 
 ---
 
-# 10. Mental Model to Remember
+## Mental Model
 
-Decorators help separate:
-
-| **Algorithm Logic** | **Engineering Logic**            |
-| ------------------- | -------------------------------- |
-| model, loss, optim  | logs, config, timing, robustness |
-
-> Use decorators whenever you need *cross-cutting functionality* that should not pollute your core research code.
-
----
+> Decorators = inject **how** without changing **what**. Use them for anything that would otherwise pollute every function (logging, timing, seeding, error handling).

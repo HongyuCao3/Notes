@@ -1,41 +1,34 @@
 # Metrics & Result Saving
 
-## Evaluation Framework
- - Key Components to be record
-   - dataset name
-   - model name
-   - args setting
- - Saving Method
-   - directory based (for logs)
-     - ```./dataset_name/model_name/args_setting.json```
-     - every time different file
-       - python code template
-        ```python
-        def get_next_filename(
-            self,
-            chain_params: SupplyChainParams,
-            save_type: str,
-            multi_turn: bool = False,
-            extension: str = "csv",
-        ) -> pathlib.Path:
-          """auto generate the path to save evaluation results"""
+## What to Record Per Run
 
-          index = 0
-          while True:
-              # 构建文件名，包含索引
-              path = self.get_filename(
-                  chain_params=chain_params,
-                  save_type=save_type,
-                  index=index,
-                  extension=extension,
-              )
+- `dataset_name`, `model_name`, `args/hyperparameters`, `metric values`, `timestamp`
+- Consistent keys make it easy to compare runs across experiments
 
-              # 如果文件不存在，则返回该路径
-              if not path.exists():
-                  return path
+## Two Saving Strategies
 
-              index += 1
-        ```
-   - dataframe based (for metrics)
-     - columns including dataset_name, model_naem, etc.
-     - all in one file
+### Directory-based (for logs, per-run outputs)
+- Path pattern: `./outputs/{dataset}/{model}/{args}.json`
+- Each run writes a new file — use auto-increment to avoid overwrites:
+  ```python
+  def get_next_filename(base_path: Path, extension="csv") -> Path:
+      index = 0
+      while True:
+          path = base_path.with_name(f"{base_path.stem}_{index}.{extension}")
+          if not path.exists():
+              return path
+          index += 1
+  ```
+
+### DataFrame-based (for metrics summary)
+- One CSV/parquet file, one row per run
+- Columns: `dataset`, `model`, `metric1`, `metric2`, `timestamp`, `args...`
+- Easy to load and compare with `pd.read_csv()` + filter/groupby
+- Append new rows with `pd.concat` or `df.to_csv(mode='a', header=False)`
+
+## Practical Tips
+
+- Save both **raw outputs** (predictions, embeddings) and **aggregated metrics** — raw lets you recompute metrics later
+- Always save the config/args alongside results for reproducibility
+- Use `json.dumps(vars(args))` to serialize argparse namespace
+- For ML experiments, consider [MLflow](https://mlflow.org/) or [Weights & Biases](https://wandb.ai/) for automatic tracking
