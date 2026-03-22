@@ -2,129 +2,63 @@
 
 ---
 
-## Purpose
+## Core Principle
 
-This document defines standards for **reproducibility and logging** in research-oriented machine learning projects.
+Reproducibility is a **research constraint**, not an engineering feature.
+Any empirical claim must be traceable to concrete evidence that can be regenerated or audited.
 
-Here, reproducibility is treated not as an optional engineering feature, but as a **research constraint**:  
-any empirical claim must be traceable to concrete experimental evidence that can be regenerated or audited.
-
-Logging and experiment tracking provide the factual backbone that connects:
-- claims,
-- experiments,
-- figures,
-- and written conclusions.
-
----
-
-## Reproducibility in Research Context
-
-Reproducibility in research differs from production reproducibility.
-
-The goal is not bitwise determinism under all environments, but **scientific traceability**, meaning:
-
-- the experimental setup is fully specified,
-- sources of randomness are controlled or documented,
-- and conclusions can be independently validated within reasonable tolerance.
+The goal is not bitwise determinism, but **scientific traceability**:
+- experimental setup fully specified,
+- randomness controlled or documented,
+- conclusions independently validatable within reasonable tolerance.
 
 A result that cannot be traced is not evidence.
 
 ---
 
-## Provenance as a First-Class Concept
+## Provenance Requirements
 
-Every experiment run must record sufficient **provenance information** to answer:
+Every canonical run must record:
 
-- What code was executed?
-- With which configuration?
-- On which data?
-- Under what randomness and environment?
-- For what intended purpose?
+| Category | What to Log |
+|----------|-------------|
+| Code & Config | git commit hash, full resolved config (after overrides), experiment family ID |
+| Data | dataset version or identifier, split definition or seed, preprocessing pipeline version |
+| Environment | random seeds, hardware type (CPU/GPU), relevant library versions |
+| Outcomes | all reported metrics, checkpoints (when applicable), logs needed to regenerate figures |
 
-Provenance should be automatically captured, not manually reconstructed.
-
----
-
-## Mandatory Logging Fields
-
-For each canonical experiment run, the following information must be recorded:
-
-### Code and Configuration
-- code version (e.g., git commit hash),
-- full resolved configuration (after overrides),
-- experiment family identifier.
-
-### Data and Evaluation
-- dataset version or identifier,
-- data split definition or seed,
-- preprocessing pipeline version.
-
-### Randomness and Environment
-- random seeds,
-- hardware type (CPU/GPU),
-- relevant library versions.
-
-### Outcomes and Artifacts
-- all reported metrics,
-- checkpoints or model states (when applicable),
-- logs required to regenerate figures.
-
-Omission of any of these weakens reproducibility.
+Omission of any field weakens reproducibility.
 
 ---
 
-## Run Modes and Logging Contracts
+## Run Mode Contracts
 
-Different run modes impose different logging requirements.
+| Mode | Logging | Eligible as Evidence? |
+|------|---------|----------------------|
+| Debug | Minimal; must be labeled non-canonical | No — results must never be used as evidence |
+| Experiment (Canonical) | All mandatory fields; deviations documented | Yes |
+| Analysis | References source run IDs; no training/eval logic changes | Derived artifacts only |
 
-### Debug Mode
-- Must be explicitly labeled as non-canonical.
-- May omit heavy artifacts.
-- Results must never be used as evidence.
-
-### Experiment Mode (Canonical)
-- Must log all mandatory fields.
-- Eligible to support claims and figures.
-- Any deviation from protocol must be documented.
-
-### Analysis Mode
-- Must not alter training or evaluation logic.
-- Must record references to source experiment run IDs.
-- Outputs are derived artifacts only (plots, tables, diagnostics).
-
-Mode information should be stored as a first-class tag.
+Mode should be stored as a first-class metadata tag.
 
 ---
 
 ## Linking Experiments to Claims
 
-Logging must support backward and forward tracing:
+Logging must support tracing in both directions:
+- **Claim → Experiments:** which families support this claim?
+- **Figure/Table → Runs:** which exact run IDs generated this result?
 
-- From a **claim** to the experiment families that support it.
-- From a **figure or table** to the exact runs that generated it.
-
-This linkage can be implemented via:
-- consistent naming conventions,
-- explicit metadata fields,
-- or lightweight documentation files.
-
-The key requirement is traceability, not tooling.
+Implementation: consistent naming conventions or lightweight metadata files. Tooling is secondary to the linkage itself.
 
 ---
 
 ## Figures as Reproducible Artifacts
 
-Figures and tables are not static images.
-
-They should be treated as:
-- derived artifacts,
-- generated from logged experiment outputs,
-- by deterministic analysis scripts.
-
-For each figure:
-- the source run IDs must be identifiable,
-- the aggregation logic must be recorded,
-- and regeneration should not require manual intervention.
+Every figure and table should be:
+- generated from logged outputs by a deterministic analysis script,
+- traceable to specific run IDs,
+- regeneratable without manual intervention.
 
 A figure that cannot be regenerated is a liability.
 
@@ -132,45 +66,19 @@ A figure that cannot be regenerated is a liability.
 
 ## Handling Non-Determinism
 
-Non-determinism is unavoidable in many ML systems.
+**Acceptable:** report mean ± variance across seeds; fix evaluation protocols; document sources of instability.
 
-Acceptable practice includes:
-- reporting averages and variance across seeds,
-- fixing evaluation protocols,
-- documenting sources of instability.
+**Unacceptable:** selective reporting; rerunning until desired outcomes appear; silently changing seeds or settings.
 
-Unacceptable practice includes:
-- selective reporting,
-- rerunning until desired outcomes appear,
-- silently changing seeds or settings.
-
-Transparency is more important than perfect determinism.
+Transparency matters more than perfect determinism.
 
 ---
 
-## Logging as a Research Interface
+## Interaction with Writing
 
-Experiment tracking systems should be viewed as:
-- an interface between execution and reasoning,
-- a source of truth during writing and rebuttal,
-- a long-term memory for research decisions.
+**During writing:** every quantitative statement must trace to a logged run; figures should be regenerated from stored artifacts.
 
-Logs are not for debugging alone; they are for accountability.
-
----
-
-## Interaction with Paper Writing
-
-During writing:
-- all quantitative statements must be traceable to logged runs,
-- figures should be regenerated from stored artifacts,
-- claims should be checked against documented evidence.
-
-During rebuttal:
-- logs serve as proof of experimental rigor,
-- missing information can often be answered without rerunning code.
-
-Well-structured logging shortens response time and reduces stress.
+**During rebuttal:** logs serve as proof of rigor; many reviewer questions can be answered without rerunning code.
 
 ---
 
@@ -180,15 +88,3 @@ Well-structured logging shortens response time and reduces stress.
 - Mixing debug and canonical runs
 - Manually editing results for presentation
 - Losing track of which runs support which claims
-
-These failures undermine trust in the results.
-
----
-
-## Final Principle
-
-Reproducibility is not about repeating experiments.
-
-It is about **making scientific evidence inspectable**.
-
-Logging systems are successful only when they make incorrect or unsupported claims difficult to maintain.

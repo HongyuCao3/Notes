@@ -2,156 +2,86 @@
 
 ---
 
-## Purpose
+## Core Idea
 
-This document defines a **claim-driven approach to literature review**, whose primary goal is to support *research decision-making*, not merely to summarize prior work.
+Literature review is not summarization — it is **risk control for claims**.
 
-Unlike topic-driven or chronology-driven reviews, this approach treats literature as a tool for:
-- validating or falsifying research claims,
-- identifying unavoidable baselines,
-- detecting conceptual overlap or novelty risks,
-- and shaping experimental design early.
-
-The output of this process is **not prose**, but a structured understanding of what can and cannot be safely claimed.
+The output is not prose, but a structured understanding of what can and cannot be safely claimed:
+- which claims are well-supported,
+- which baselines are unavoidable,
+- where novelty is at risk.
 
 ---
 
-## Claim-Driven vs. Topic-Driven Review
+## Claim-Driven vs. Topic-Driven
 
-### Topic-Driven Review (Common but Risky)
+**Topic-driven (avoid):** collect papers by topic → summarize → write related work afterward.
+Problem: baseline expectations stay implicit; counter-evidence gets missed; problems surface at rebuttal.
 
-Typical workflow:
-- Choose a topic (e.g., *tabular data generation*)
-- Collect papers related to the topic
-- Summarize methods chronologically or thematically
-- Write a related work section afterward
+**Claim-driven (this workflow):**
+1. Formulate candidate claims
+2. Search literature to test those claims
+3. Record support, counter-evidence, and gaps
+4. Update claims accordingly
 
-Limitations:
-- Weak connection to the paper’s actual claims
-- Easy to miss counter-evidence
-- Baseline expectations remain implicit
-- Problems surface late (often during rebuttal)
+Literature is evaluated by **what it implies for your claim**, not by topic membership.
 
 ---
 
-### Claim-Driven Review (This Workflow)
+## What Counts as a Claim
 
-Claim-driven review inverts the process:
+Any statement that will appear (explicitly or implicitly) in the paper, can be questioned by reviewers, and requires justification.
 
-1. **Formulate candidate research claims**
-2. **Search literature specifically to test those claims**
-3. **Record supporting evidence, counter-evidence, and gaps**
-4. **Update or restrict claims accordingly**
-
-Literature is evaluated based on **what it implies for the claim**, not on whether it belongs to a topic.
+Types: background, methodological, empirical, limitation. All require scrutiny.
 
 ---
 
-## What Counts as a “Claim”
+## Claim Lifecycle
 
-In this workflow, a *claim* is any statement that:
-
-- is likely to appear (explicitly or implicitly) in the paper,
-- can be questioned by reviewers,
-- and requires empirical or theoretical justification.
-
-Examples:
-- “Synthetic data improves downstream performance under distribution shift.”
-- “Existing generators optimize distributional fidelity rather than task utility.”
-- “Validation-based reweighting does not generalize to unseen environments.”
-
-Claims may be:
-- background claims,
-- methodological claims,
-- or limitation claims.
-
-All of them require scrutiny.
-
----
-
-## Lifecycle of a Claim
-
-Claims are **not static**. Each claim goes through the following lifecycle:
-
-1. **Working claim**  
-   An initial hypothesis or intuition.
-
-2. **Literature probing**  
-   Targeted search for:
-   - direct support,
-   - partial support,
-   - explicit counter-examples.
-
-3. **Risk assessment**  
-   Evaluate:
-   - strength of evidence,
-   - scope of validity,
-   - likelihood of reviewer challenge.
-
-4. **Claim refinement**  
-   Possible outcomes:
-   - restrict scope (e.g., IID → OOD only),
-   - soften language,
-   - reframe as motivation rather than assertion,
-   - or discard entirely.
+1. **Working claim** — initial hypothesis or intuition
+2. **Literature probing** — search for direct support, partial support, counter-examples
+3. **Risk assessment** — scope of validity, likelihood of reviewer challenge
+4. **Refinement** — restrict scope, soften language, reframe as motivation, or discard
 
 A claim should never reach the paper unchanged without passing this process.
 
 ---
 
-## How to Conduct Claim-Driven Literature Search
+## How to Search
 
-### Step 1: Make the Claim Explicit
+**Step 1: Write the claim as a single explicit sentence.**
 
-Before searching, write the claim as a single sentence.
-
-Bad:
-> “There are limitations in existing methods.”
-
-Good:
-> “Existing tabular data generators often fail to improve downstream task performance under distribution shift.”
+Bad: "There are limitations in existing methods."
+Good: "Existing tabular generators fail to improve downstream performance under distribution shift."
 
 Search quality depends on claim precision.
 
 ---
 
-### Step 2: Search by Implication, Not by Keyword
+**Step 2: Search by implication, not by keyword.**
 
-Avoid generic searches such as:
-- “tabular data generation”
-- “synthetic data GAN”
+Avoid: "tabular data generation", "synthetic data GAN"
+Search instead for what would *contradict or validate* the claim:
+- "synthetic data downstream task performance"
+- "data augmentation under distribution shift"
+- "importance weighting generalization failure"
 
-Instead, search for **what would contradict or validate the claim**:
-
-Examples:
-- “synthetic data downstream performance”
-- “data augmentation under distribution shift”
-- “importance weighting generalization failure”
-
-This increases the chance of finding uncomfortable but necessary evidence.
+This surfaces uncomfortable but necessary evidence.
 
 ---
 
-### Step 3: Actively Look for Counter-Evidence
+**Step 3: Actively look for counter-evidence.**
 
-A claim-driven review is incomplete unless it answers:
-
-- Under what conditions does this claim *not* hold?
-- Has anyone reported negative or mixed results?
-- Are there benchmarks that contradict the intuition?
-
+A review is incomplete without answering: under what conditions does this claim *not* hold?
 Finding counter-evidence early is a success, not a failure.
 
 ---
 
-## What to Record for Each Claim
+## What to Record
 
-Each claim should be documented using a structured format (see templates), capturing at least:
-
-- Claim statement (current version)
-- Supporting literature
-- Counter-evidence or edge cases
-- Risk level (low / medium / high)
-- Design implications for the project
-
-The goal is to make reasoning explicit
+For each claim, document via the claim template:
+- claim statement (current version)
+- supporting literature (with a note on *how* each supports)
+- counter-evidence and edge cases
+- risk level: low / medium / high
+- design implications for the project
