@@ -1,186 +1,130 @@
 # Paper Reading Notes (Claim-Oriented)
 
 ## Paper Information
-- **Title**:  
-- **Authors**:  
-- **Venue / Year**:  
-- **Research Area**:  
+- **Title**:
+- **Authors**:
+- **Venue / Year**:
+- **Research Area**:
 - **Paper Type**: ☐ Method ☐ Theory ☐ Empirical ☐ System ☐ Survey
 
 ---
 
-## 🎯 Central Claim (One-Sentence, Mandatory)
+## 🎯 Central Claim *(one falsifiable sentence — no “and / as well as”)*
 
-> **If I can only cite this paper once, what exact statement am I citing it for?**
+> **If I cite this paper once, what exact statement am I citing?**
 
-- **Claim Statement**:  
-  > *This paper claims that …*
+- **Claim**: *This paper claims that …*
 
-- **Claim Type** (choose ONE):
-  - ☐ Method superiority  
-  - ☐ Conceptual reframing  
-  - ☐ Theoretical guarantee  
-  - ☐ Empirical finding  
-  - ☐ Diagnostic / negative result  
+- **Type**: ☐ Method superiority ☐ Conceptual reframing ☐ Theoretical guarantee ☐ Empirical finding ☐ Diagnostic / negative result
 
-- **Claim Scope**:
-  - **Applies to**: (task / data / setting)
-  - **Assumes**: (key assumptions)
-  - **Does NOT claim**: (explicit non-claims)
-
-⚠️ **Rule**:  
-- One sentence only  
-- No “and / as well as”  
-- Must be falsifiable
+- **Scope**:
+  - **Applies to**: *(task / data / setting)*
+  - **Assumes**: *(key assumptions, ≤ 1 sentence)*
+  - **Does NOT claim**: *(explicit non-claim, ≤ 1 sentence)*
 
 ---
 
-## 🧠 Abstract-Only Claim Extraction (Fast Pass)
+## 🧠 Abstract Pre-Read *(fill before reading full paper)*
 
-> Filled **before** reading the full paper
+| | |
+|---|---|
+| **Did** | What did they do? |
+| **vs.** | Better than what? |
+| **Shows** | What should I believe? |
+| **When** | Under what conditions? |
 
-- **Action** (What did they do?):  
-- **Comparison** (Better than what?):  
-- **Outcome** (What should I believe?):  
-- **Conditions** (When / where does this hold?):  
-
-> **Draft Claim from Abstract**:  
-> By doing ___, this paper shows that ___ leads to ___ compared to ___ under ___.
-
-(Revise later if needed)
+> **Draft Claim**: By doing ___, this paper shows ___ compared to ___ under ___.
 
 ---
 
-## R — Research Question (Claim Premises)
+## R — Research Question *(what must be true for the claim to matter?)*
 
-> What must be true for the central claim to matter?
-
-- **Problem Setting**:  
-- **Previous Gap**:  
-  - What existing methods fail to address?
-  - Why does this gap block the claim?
-- **Formal Objective (if applicable)**:  
-  - $$\min_\theta \mathcal{L}(f_\theta(x), y)$$
-- **Why This Problem Enables the Claim**:  
-  (Why solving this problem makes the claim meaningful)
-
----
-
-## I — Insight (Claim Causality)
-
-> Why *should* the central claim be true?
-
-- **Core Insight**:  
-  (Mechanism-level intuition)
-- **Why This Insight Was Non-Obvious**:  
-- **How It Directly Supports the Claim**:  
-- **Contrast with Prior Work**:  
-  (What intuition they missed)
-
----
-
-## C — Contributions (Claim Decomposition)
-
-> Which parts of the paper support which parts of the claim?
-
-1. **Primary Contribution** (Directly supports central claim)  
-2. **Secondary Contributions** (Support scope / robustness)  
-3. **Auxiliary Contributions** (Nice-to-have, not core)
-
-⚠️ Mark clearly:
-- ☐ Claim-critical  
-- ☐ Claim-supporting  
-- ☐ Claim-irrelevant (for citation)
-
----
-
-## H — How It Works (Claim Realization)
-
-> How is the claim operationalized?
-
-### Problem Formulation
-- Objective:
+- **Problem**: *(1 sentence)*
+- **Gap**: existing methods fail because ___ → this blocks the claim by ___
+- **Formal Objective** *(if applicable)*: 
   $$\min_\theta \mathcal{L}(f_\theta(x), y)$$
-- Key assumptions that the claim depends on:
-
-### Algorithm Overview
-- Step 1:  
-- Step 2:  
-- Step 3:  
-
-- **Key Innovation Step** (Claim hinge point):  
-- **What would break the claim if removed?**
-
-### Complexity & Practicality
-- Time:
-- Space:
-- Deployment constraints relevant to claim:
 
 ---
 
-## 🔬 Experiments & Results (Claim Evidence)
+## I — Insight *(why should the claim be true?)*
 
-> Do the experiments actually justify the claim?
+- **Mechanism**: *(1 sentence — core causal intuition)*
+- **Non-obvious because**: *(what prior work missed, ≤ 1 sentence)*
+- **Links to claim**: *(direct causal chain, ≤ 2 sentences)*
 
-### Evidence Table
+---
 
-| Evidence | Supports Which Claim Part | Strength |
-|--------|--------------------------|----------|
+## C — Contributions *(which part of the paper supports which part of the claim?)*
+
+| Contribution | Claim Relation |
+|---|---|
+| **Primary**: | ☐ Claim-critical |
+| **Secondary**: | ☐ Claim-supporting |
+| **Auxiliary**: | ☐ Claim-irrelevant |
+
+---
+
+## H — How It Works *(how is the claim operationalized?)*
+
+**Objective**: 
+$$\min_\theta \mathcal{L}(f_\theta(x), y)$$
+**Key assumptions for claim to hold**:
+
+**Algorithm** *(only steps that matter for the claim)*:
+1.
+2.
+3.
+
+- **Claim hinge**: *(which step, if removed, breaks the claim?)*
+
+**Complexity**: Time: · Space: · Deployment constraint:
+
+---
+
+## 🔬 Experiments *(do the results justify the claim?)*
+
+| Evidence | Claim Part Supported | Strength |
+|---|---|---|
 | Main results | Core claim | Strong / Medium / Weak |
-| Ablation | Causal mechanism | Medium |
-| Theory | Boundary condition | Conditional |
-| Case study | Intuition only | Weak |
+| Ablation | Causal mechanism | |
+| Theory | Boundary condition | |
 
-### Stress Tests
-- Where does the claim weaken?
-- Any untested assumptions?
+- **Claim weakens when**:
+- **Untested assumption**:
 
 ---
 
-## 🔍 Claim–Evidence Sanity Check (Required)
+## 🔍 Claim–Evidence Check
 
-- Is the **central claim directly tested**? ☐ Yes ☐ No  
-- Is support **empirical / theoretical / mixed**?  
-- Any overreach in wording vs evidence?
-
-> **If reviewer #2 questioned the claim, what is the weakest link?**
+- Central claim directly tested? ☐ Yes ☐ No
+- Support type: ☐ Empirical ☐ Theoretical ☐ Mixed
+- **Weakest link if challenged**: *(1 sentence)*
 
 ---
 
-## 🔑 Final Claim (Post-Reading, Canonical)
-
-> **Final version of the one-sentence claim** (this is what you will actually cite):
+## 🔑 Final Claim *(post-reading, one sentence)*
 
 > *This paper shows that …*
 
-(If this differs from the abstract version, note why.)
+*(If differs from draft claim, note why in ≤ 1 sentence.)*
 
 ---
 
-## 🧾 Citation-Ready Summary (Optional but Powerful)
-
-> **One sentence I can paste into a literature review**:
+## 🧾 Citation-Ready
 
 > “Author et al. (Year) show that …”
 
 ---
 
-## ✍️ Writing & Reviewing Takeaways (Optional)
+## ✍️ Takeaways *(optional)*
 
-### Claim Framing
-- How is confidence calibrated?
-- Any effective hedging language?
-
-### Experimental Storytelling
-- Which experiment answers which doubt about the claim?
-
-### Transfer to My Work
-- Can my paper support a claim this clean?
-- Which section of mine is currently claim-weak?
+- **Claim framing**: How is confidence calibrated?
+- **Experiment storytelling**: Which experiment answers which doubt?
+- **My work**: Which section of mine is currently claim-weak?
 
 ---
 
-## 🏷️ Tags (for retrieval)
+## 🏷️ Tags
 - #core-claim:
 - #method:
 - #theory:
