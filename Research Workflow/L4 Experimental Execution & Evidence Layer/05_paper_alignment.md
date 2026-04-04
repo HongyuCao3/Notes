@@ -89,12 +89,38 @@ Overconfident claims are more damaging than modest ones.
 
 ## Pre-Submission Checklist
 
+This check should be mechanical, not subjective.
+
+### Traceability
 - Every claim appears in the claim documentation
 - Every figure maps to logged experiment runs
 - Every baseline omission is justified
 - All reported results are reproducible
 
-This check should be mechanical, not subjective.
+### Introduction
+- Explain why the research questions should be solved now, what's the broader impacts
+- Identify the research map and current gap, locate our method and perspective
+- Every new concept should have its context
+- Technical points should be attached coherently with application
+- Use easy to follow words and insightful examples
+
+### Method
+- Split the model structure and workflow to different illustrations
+- Equation should almost fill the line, combine short equations
+- Use the same color for the same concept
+- Avoid implementation details (like hyper-parameters), which should be included in appendix
+
+### Experiments
+- Main experiment should prove the main claim of paper (eg. the robustness of the model)
+- Images contains more information, combine different types of images
+- Only state key change in tables, add scientific guess (implications)
+
+### Conclusion
+- Add limitation
+  - Including ad-hoc choices in method as future work
+
+### References
+- Avoid hallucination references, manually check
 
 ---
 
