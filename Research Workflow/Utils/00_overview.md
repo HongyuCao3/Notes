@@ -37,6 +37,8 @@ This process is **iterative**: claims may be refined or discarded as evidence ac
 | `L2/claim_template.md` | Per-claim documentation |
 | `L3/experiment_log_template.md` | Per-experiment-family documentation |
 | `Utils/risk_log_template.md` | Risk tracking |
+| `Utils/collaboration.md` | Team roles and collaboration stages across the workflow |
+| `Utils/paper_review.md` | Best practices for writing peer reviews |
 
 ---
 
