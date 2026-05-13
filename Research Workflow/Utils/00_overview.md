@@ -16,10 +16,11 @@
 
 1. Define candidate research claims
 2. Conduct claim-driven literature review
-3. Identify unavoidable baselines and risks
-4. Design experiments aligned with claims
-5. Run and log experiments with full provenance
-6. Assemble the paper from validated claims
+3. Screen candidate mechanisms with cheap signal probes before engineering
+4. Identify unavoidable baselines and risks
+5. Design experiments aligned with claims
+6. Run and log experiments with full provenance
+7. Assemble the paper from validated claims
 
 This process is **iterative**: claims may be refined or discarded as evidence accumulates.
 
@@ -30,6 +31,7 @@ This process is **iterative**: claims may be refined or discarded as evidence ac
 | File | Role |
 |------|------|
 | `L2/01_claim_driven_literature_review.md` | How to structure literature search around claims |
+| `L3/01_pre_experiment_signal_screening.md` | Cheap-signal probes and sanity gates before engineering a candidate mechanism |
 | `L3/02_baseline_risk_control.md` | Identify mandatory baselines; front-load reviewer expectations |
 | `L3/03_experiment_engineering.md` | Design claim-driven, reproducible experiment families |
 | `L3/04_reproducibility_and_logging.md` | Logging standards and traceability requirements |
