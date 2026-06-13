@@ -15,6 +15,20 @@ If an experiment cannot be mapped to a claim, it is likely unnecessary.
 
 ---
 
+## Pre-Execution Gate
+
+A logical judgment precedes execution; experiments do not start blind. Before any **Canonical** run moves from `Planned` to `Running`, the following must be recorded in its experiment log:
+
+- **Hypothesis** — one falsifiable, directional prediction.
+- **Literature-grounded rationale** — the deductive chain from established results to the prediction: which prior findings serve as premises, and why they imply the predicted outcome. A hypothesis that cannot be tied to a premise from the literature or from an L1 formal definition is not yet justified.
+- **Falsification condition** — the specific observed result that would refute the hypothesis, stated before the run.
+
+This gate is mandatory, not advisory. A run whose log lacks any of the three is not eligible to produce evidence. Debug runs are exempt; they exist precisely to inform these three fields before a Canonical run is committed.
+
+> A "logical judgment based on the literature" is the entry condition for experimentation, not a step performed after results arrive.
+
+---
+
 ## Experiment Families
 
 Organize into **families** by claim, baseline group, or ablation question. Each family defines:

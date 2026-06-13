@@ -20,7 +20,21 @@ One explicit question this family answers.
 ---
 
 ## Hypothesis
+One falsifiable, directional prediction.
 > Example: "Removing the invariance component will degrade performance under domain shift while having limited impact under IID."
+
+---
+
+## Literature-Grounded Rationale
+**(Mandatory — pre-execution gate)** The deductive chain from established results to the hypothesis: which prior findings or L1 formal definitions serve as premises, and why they imply the predicted outcome. Cite the supporting claim IDs and references.
+A hypothesis without a premise from the literature is not yet justified and the run does not start.
+> Example: "Invariant-feature theory (ref) predicts that domain-invariant representations transfer across shifts; the invariance component is the only module enforcing this, so its removal should cost OOD performance specifically."
+
+---
+
+## Falsification Condition
+**(Mandatory — pre-execution gate)** The specific observed result that would refute the hypothesis, stated *before* the run.
+> Example: "If OOD performance is unchanged after removing the invariance component, the hypothesis is refuted."
 
 ---
 
@@ -93,6 +107,8 @@ MLflow run IDs, checkpoints, generated figures/tables.
 
 ## Status
 Planned → Running → Completed → Deprecated
+
+Pre-execution gate: a Canonical family does not move from `Planned` to `Running` until Hypothesis, Literature-Grounded Rationale, and Falsification Condition are filled.
 
 ---
 

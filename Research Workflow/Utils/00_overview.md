@@ -6,9 +6,10 @@
 
 1. **Claims before methods** — organize around *what we want to claim*, not around models or techniques.
 2. **Literature as risk control** — identify coverage, counter-evidence, and baseline expectations *before* heavy experimentation.
-3. **Config-first experimentation** — every experiment is defined by explicit, version-controlled configurations.
-4. **Reproducibility as a constraint** — all figures and conclusions must be traceable to concrete, logged runs.
-5. **Paper alignment from day one** — claims, experiments, and paper sections are designed to map to each other.
+3. **Logical pre-judgment before experiment** — every experiment is preceded by a literature-grounded deductive prediction and an explicit falsification condition. The reasoning chain — which established results in the literature imply the predicted outcome — is a recorded artifact, not an unstated intuition. An experiment without a stated hypothesis and its literature basis is not executed. This principle governs the transition from claim construction to experiment design and execution. Operationalized by the pre-execution gate in `L3/03_experiment_engineering.md` and the hypothesis fields in `L3/experiment_log_template.md`.
+4. **Config-first experimentation** — every experiment is defined by explicit, version-controlled configurations.
+5. **Reproducibility as a constraint** — all figures and conclusions must be traceable to concrete, logged runs.
+6. **Paper alignment from day one** — claims, experiments, and paper sections are designed to map to each other.
 
 ---
 

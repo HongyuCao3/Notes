@@ -85,3 +85,9 @@ For each claim, document via the claim template:
 - counter-evidence and edge cases
 - risk level: low / medium / high
 - design implications for the project
+
+---
+
+## Bridge to Experimentation
+
+The logical judgment built here is the entry condition for experiments, not a parallel track. The premises a claim draws from the literature become the **literature-grounded rationale** required before any experiment runs (see the pre-execution gate in [../L3 Engineering Contract Design & Coding/03_experiment_engineering.md](../L3%20Engineering%20Contract%20Design%20%26%20Coding/03_experiment_engineering.md)). An experimental hypothesis that cannot be traced back to a premise recorded here is not yet justified.
